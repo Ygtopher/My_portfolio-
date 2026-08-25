@@ -441,6 +441,38 @@
     /* ============================================================
    ABOUT
    ============================================================ */
+    .personal-info {
+      margin-top: 32px;
+      margin-bottom: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 400px;
+    }
+
+    .personal-info .info-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 8px;
+    }
+
+    .personal-info .k {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--ink-faint);
+    }
+
+    .personal-info .v {
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .personal-info .v.ok {
+      color: var(--accent-2);
+    }
     .about-grid {
       display: grid;
       grid-template-columns: 1.3fr 1fr;
@@ -1055,6 +1087,13 @@
         </div>
         <div class="about-grid cascade-item">
           <div>
+            <div class="personal-info">
+              <div class="info-row"><span class="k">First Name</span><span class="v">Nsengiyumva</span></div>
+              <div class="info-row"><span class="k">Last Name</span><span class="v">Christophe</span></div>
+              <div class="info-row"><span class="k">Age</span><span class="v" id="my-age"></span></div>
+              <div class="info-row"><span class="k">Nationality</span><span class="v">Rwandan</span></div>
+              <div class="info-row"><span class="k">Freelance</span><span class="v ok">Available</span></div>
+            </div>
             <p>
               Hey, I'm Christophe — a <strong>full-stack developer</strong> who genuinely
               gets excited about building things that work beautifully. I love the whole
@@ -1327,6 +1366,16 @@
         const years = year - START_YEAR;
         yearsEl.textContent = years + '+';
       }
+
+      // Age calculation
+      const dob = new Date('2001-10-24');
+      let age = year - dob.getFullYear();
+      const m = now.getMonth() - dob.getMonth();
+      if (m < 0 || (m === 0 && now.getDate() < dob.getDate())) {
+        age--;
+      }
+      const ageEl = document.getElementById('my-age');
+      if (ageEl) ageEl.textContent = age;
     }
 
     updateTimestamps();
