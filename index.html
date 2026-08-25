@@ -1,0 +1,1304 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nsengiyumva Christophe — Full-Stack Developer</title>
+  <meta name="description"
+    content="Nsengiyumva Christophe — passionate full-stack developer building modern web applications with Java Spring Boot, PHP, and React JS.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ============================================================
+   TOKENS
+   ============================================================ */
+    :root {
+      --bg: #0B2545;
+      --bg-alt: #0F2F52;
+      --bg-panel: #10305a;
+      --line: rgba(141, 169, 196, 0.22);
+      --line-strong: rgba(141, 169, 196, 0.45);
+      --ink: #EAF2FA;
+      --ink-dim: #93AFC9;
+      --ink-faint: #5E7A96;
+      --accent: #FFD166;
+      --accent-2: #5BC0BE;
+      --radius: 2px;
+      --display: 'Space Grotesk', sans-serif;
+      --body: 'Inter', sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+      --max: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--body);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* ============================================================
+   BLUEPRINT GRID BACKDROP
+   ============================================================ */
+    .grid-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(var(--line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--line) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.35;
+      mask-image: radial-gradient(ellipse 90% 70% at 50% 20%, black 40%, transparent 90%);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* corner crop marks used on section frames */
+    .crop {
+      position: relative;
+    }
+
+    .crop::before,
+    .crop::after,
+    .crop .cm-tl,
+    .crop .cm-tr,
+    .crop .cm-bl,
+    .crop .cm-br {
+      content: '';
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border: 1.5px solid var(--line-strong);
+    }
+
+    .crop::before {
+      top: -1px;
+      left: -1px;
+      border-right: none;
+      border-bottom: none;
+    }
+
+    .crop::after {
+      top: -1px;
+      right: -1px;
+      border-left: none;
+      border-bottom: none;
+    }
+
+    .crop .cm-bl {
+      bottom: -1px;
+      left: -1px;
+      border-right: none;
+      border-top: none;
+    }
+
+    .crop .cm-br {
+      bottom: -1px;
+      right: -1px;
+      border-left: none;
+      border-top: none;
+    }
+
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ============================================================
+   NAV
+   ============================================================ */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(11, 37, 69, 0.82);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    nav.wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 20px;
+      padding-bottom: 20px;
+    }
+
+    .logo {
+      font-family: var(--mono);
+      font-size: 15px;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .logo .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    .navlinks {
+      display: flex;
+      gap: 32px;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--ink-dim);
+    }
+
+    .navlinks a {
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    .navlinks a:hover {
+      color: var(--ink);
+    }
+
+    .navlinks a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -6px;
+      height: 1px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s;
+    }
+
+    .navlinks a:hover::after {
+      transform: scaleX(1);
+    }
+
+    .navlinks .resume-link {
+      color: var(--accent);
+    }
+
+    .navtoggle {
+      display: none;
+    }
+
+    /* ============================================================
+   HERO — title block styled like a technical drawing stamp
+   ============================================================ */
+    .hero {
+      padding: 120px 0 100px;
+      position: relative;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .hero-avatar {
+      flex-shrink: 0;
+      width: 280px;
+      position: relative;
+    }
+
+    .hero-avatar img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: cover;
+      mask-image:
+        linear-gradient(to right, transparent 0%, black 22%, black 78%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%, black 18%, black 60%, transparent 100%);
+      -webkit-mask-image:
+        linear-gradient(to right, transparent 0%, black 22%, black 78%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%, black 18%, black 60%, transparent 100%);
+      mask-composite: intersect;
+      -webkit-mask-composite: source-in;
+      filter: brightness(0.95) contrast(1.05);
+    }
+
+    @media(max-width:860px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-avatar {
+        width: 200px;
+        margin: 0 auto;
+      }
+    }
+
+    .hero-kicker {
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: clamp(40px, 7vw, 84px);
+      line-height: 1.02;
+      letter-spacing: -0.01em;
+      max-width: 16ch;
+    }
+
+    .hero h1 .line2 {
+      color: var(--ink-dim);
+      font-weight: 500;
+      display: block;
+    }
+
+    .hero p.lede {
+      margin-top: 28px;
+      max-width: 56ch;
+      font-size: 18px;
+      color: var(--ink-dim);
+    }
+
+    .hero-cta {
+      margin-top: 40px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      padding: 14px 22px;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: border-color 0.2s, background 0.2s, transform 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+      font-weight: 600;
+    }
+
+    .btn.primary:hover {
+      background: #ffdb85;
+    }
+
+    .btn.ghost:hover {
+      border-color: var(--accent-2);
+      color: var(--accent-2);
+    }
+
+    /* title block: bottom-right stamp, like a blueprint's info box */
+    .titleblock {
+      margin-top: 72px;
+      border: 1px solid var(--line-strong);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .titleblock .cell {
+      padding: 16px 20px;
+      border-right: 1px solid var(--line);
+    }
+
+    .titleblock .cell:last-child {
+      border-right: none;
+    }
+
+    .titleblock .cell .k {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      margin-bottom: 6px;
+    }
+
+    .titleblock .cell .v {
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--ink);
+    }
+
+    .titleblock .cell .v.ok {
+      color: var(--accent-2);
+    }
+
+    /* ============================================================
+   SECTION SCAFFOLDING
+   ============================================================ */
+    section {
+      padding: 100px 0;
+      position: relative;
+      border-top: 1px solid var(--line);
+    }
+
+    .sec-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 56px;
+      flex-wrap: wrap;
+    }
+
+    .sec-head h2 {
+      font-family: var(--display);
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 600;
+    }
+
+    .sec-num {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--ink-faint);
+    }
+
+    /* ============================================================
+   ABOUT
+   ============================================================ */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 64px;
+    }
+
+    .about-grid p {
+      color: var(--ink-dim);
+      font-size: 16px;
+      margin-bottom: 18px;
+      max-width: 60ch;
+    }
+
+    .about-grid p strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .stat-list {
+      border-left: 1px solid var(--line-strong);
+      padding-left: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .stat {}
+
+    .stat .num {
+      font-family: var(--display);
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--accent);
+    }
+
+    .stat .lbl {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--ink-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-top: 4px;
+    }
+
+    /* ============================================================
+   STACK — schematic node diagram
+   ============================================================ */
+    .stack-diagram {
+      padding: 32px;
+      border: 1px solid var(--line-strong);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .node-svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .node-svg .conn {
+      stroke: var(--line-strong);
+      stroke-width: 1;
+      fill: none;
+      stroke-dasharray: 4 4;
+    }
+
+    .node-svg .conn.flow {
+      stroke: var(--accent-2);
+      stroke-dasharray: 3 5;
+      animation: flow 3.5s linear infinite;
+      opacity: 0.85;
+    }
+
+    @keyframes flow {
+      to {
+        stroke-dashoffset: -160;
+      }
+    }
+
+    .node-svg .core-ring {
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 1.5;
+    }
+
+    .node-svg .core-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      fill: var(--ink);
+      letter-spacing: 0.04em;
+    }
+
+    .node-svg .node-box {
+      fill: var(--bg-panel);
+      stroke: var(--line-strong);
+      stroke-width: 1;
+    }
+
+    .node-svg .node-box.hot {
+      stroke: var(--accent-2);
+    }
+
+    .node-svg .node-text {
+      font-family: var(--mono);
+      font-size: 11.5px;
+      fill: var(--ink-dim);
+    }
+
+    .node-svg .node-text.hot {
+      fill: var(--ink);
+    }
+
+    /* ============================================================
+   PROJECTS — spec sheet cards
+   ============================================================ */
+    .projects {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project {
+      display: grid;
+      grid-template-columns: 120px 1fr 200px;
+      gap: 32px;
+      padding: 32px 0;
+      border-top: 1px solid var(--line);
+      align-items: start;
+      transition: background 0.2s;
+    }
+
+    .project:first-child {
+      border-top: none;
+    }
+
+    .project:hover {
+      background: rgba(141, 169, 196, 0.04);
+    }
+
+    .project .pnum {
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--ink-faint);
+      padding-top: 4px;
+    }
+
+    .project h3 {
+      font-family: var(--display);
+      font-size: 22px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .project p {
+      color: var(--ink-dim);
+      font-size: 15px;
+      max-width: 60ch;
+      margin-bottom: 14px;
+    }
+
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent-2);
+      border: 1px solid rgba(91, 192, 190, 0.35);
+      padding: 4px 9px;
+      border-radius: var(--radius);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .project .plinks {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    .project .plinks a {
+      font-family: var(--mono);
+      font-size: 12.5px;
+      color: var(--ink-dim);
+      transition: color 0.2s;
+    }
+
+    .project .plinks a:hover {
+      color: var(--accent);
+    }
+
+    /* tags row — align items center for dot */
+    .tags { align-items: center; }
+
+    /* language color dot */
+    .lang-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .lang-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--ink-dim);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    /* repo meta: stars, forks, updated */
+    .repo-meta {
+      display: flex;
+      gap: 14px;
+      margin-top: 8px;
+    }
+    .repo-meta span {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--ink-faint);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* loading skeleton */
+    .proj-skeleton {
+      padding: 32px 0;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .proj-skeleton:first-child { border-top: none; }
+    .skel {
+      background: linear-gradient(90deg, var(--bg-panel) 25%, var(--bg-alt) 50%, var(--bg-panel) 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      border-radius: 2px;
+    }
+    @keyframes shimmer { to { background-position: -200% 0; } }
+
+    /* github cta */
+    .github-cta {
+      margin-top: 48px;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* error state */
+    .proj-error {
+      padding: 32px;
+      border: 1px solid var(--line);
+      color: var(--ink-dim);
+      font-family: var(--mono);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    /* ============================================================
+   WRITING / NOTES
+   ============================================================ */
+    .notes {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .note {
+      border: 1px solid var(--line);
+      padding: 24px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .note:hover {
+      border-color: var(--line-strong);
+      transform: translateY(-3px);
+    }
+
+    .note .date {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--ink-faint);
+      margin-bottom: 12px;
+    }
+
+    .note h4 {
+      font-family: var(--display);
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .note p {
+      font-size: 14px;
+      color: var(--ink-dim);
+    }
+
+    /* ============================================================
+   CONTACT / FOOTER — legend style
+   ============================================================ */
+    footer {
+      border-top: 1px solid var(--line);
+      padding: 80px 0 40px;
+    }
+
+    .contact-head h2 {
+      font-family: var(--display);
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 700;
+      max-width: 14ch;
+      margin-bottom: 20px;
+    }
+
+    .contact-head p {
+      color: var(--ink-dim);
+      max-width: 50ch;
+      margin-bottom: 36px;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 72px;
+    }
+
+    .legend a {
+      font-family: var(--mono);
+      font-size: 14px;
+      border: 1px solid var(--line-strong);
+      padding: 14px 20px;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .legend a:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .legend a .sq {
+      width: 6px;
+      height: 6px;
+      background: var(--accent-2);
+    }
+
+    .foot-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--ink-faint);
+    }
+
+    /* ============================================================
+   RESPONSIVE
+   ============================================================ */
+    @media (max-width: 860px) {
+      .navlinks {
+        display: none;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .stat-list {
+        flex-direction: row;
+        flex-wrap: wrap;
+        border-left: none;
+        padding-left: 0;
+        border-top: 1px solid var(--line-strong);
+        padding-top: 24px;
+      }
+
+      .titleblock {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .titleblock .cell:nth-child(2n) {
+        border-right: none;
+      }
+
+      .titleblock .cell:nth-child(-n+2) {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .project {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .project .plinks {
+        align-items: flex-start;
+        text-align: left;
+        flex-direction: row;
+        gap: 20px;
+      }
+
+      .notes {
+        grid-template-columns: 1fr;
+      }
+
+      .wrap {
+        padding: 0 20px;
+      }
+
+      section {
+        padding: 72px 0;
+      }
+    }
+
+    /* ============================================================
+       STAGGERED CASCADE ANIMATION
+       Each .cascade-item fades + slides up; delay = --i * 120ms
+       ============================================================ */
+    .cascade-item {
+      opacity: 0;
+      transform: translateY(22px);
+      transition:
+        opacity  0.55s ease-out,
+        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transition-delay: calc(var(--i, 0) * 120ms);
+      will-change: opacity, transform;
+    }
+    .cascade-item.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .cascade-item {
+        transition: none;
+        opacity: 1;
+        transform: none;
+      }
+    }
+
+    /* focus visibility */
+    a:focus-visible,
+    .btn:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 3px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="grid-bg" aria-hidden="true"></div>
+
+  <header>
+    <nav class="wrap">
+      <div class="logo"><span class="dot"></span> NC / DEVELOPER</div>
+      <div class="navlinks">
+        <a href="#about">About</a>
+        <a href="#stack">Stack</a>
+        <a href="#projects">Projects</a>
+        <a href="#notes">Notes</a>
+        <a href="#contact" class="resume-link">Contact →</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero wrap" style="border-top:none;">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <h1 class="cascade-item">
+            Nsengiyumva Christophe
+            <span class="line2">Full-Stack Developer crafting reliable, scalable web applications.</span>
+          </h1>
+          <p class="lede cascade-item">
+            I design and build end-to-end web solutions — from structured, maintainable backends
+            in <strong>Java Spring Boot</strong> and <strong>PHP</strong>, to responsive, high-performance
+            frontends with <strong>JavaScript</strong> and <strong>React JS</strong>.
+            My focus is on clean architecture, seamless APIs, and software that genuinely solves problems.
+          </p>
+          <div class="hero-cta cascade-item">
+            <a href="#projects" class="btn primary">View projects</a>
+            <a href="mailto:nsechris0@gmail.com" class="btn ghost">nsechris0@gmail.com</a>
+            <a href="#" class="btn ghost">Download résumé ↓</a>
+          </div>
+        </div>
+
+        <div class="hero-avatar cascade-item">
+          <img src="photo.jpg" alt="Nsengiyumva Christophe — Full-Stack Developer">
+        </div>
+      </div>
+
+      <div class="titleblock cascade-item" style="margin-top:48px;">
+        <div class="cell">
+          <div class="k">Role</div>
+          <div class="v">Full-Stack Developer</div>
+        </div>
+        <div class="cell">
+          <div class="k">Focus</div>
+          <div class="v">Web &amp; APIs</div>
+        </div>
+        <div class="cell">
+          <div class="k">Based in</div>
+          <div class="v">Rwanda 🇷🇼</div>
+        </div>
+        <div class="cell">
+          <div class="k">Status</div>
+          <div class="v ok">● Open to work</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section id="about" class="reveal">
+      <div class="wrap">
+        <div class="sec-head cascade-item">
+          <div>
+            <h2>About</h2>
+          </div>
+        </div>
+        <div class="about-grid cascade-item">
+          <div>
+            <p>
+              Hey, I'm Christophe — a <strong>full-stack developer</strong> who genuinely
+              gets excited about building things that work beautifully. I love the whole
+              journey: designing clean <strong>REST APIs / JSON</strong> that make sense,
+              writing solid backend logic in <strong>Java Spring Boot</strong> or
+              <strong>PHP</strong>, and then bringing it all to life with crisp
+              <strong>JavaScript</strong> and <strong>React JS</strong> on the frontend.
+            </p>
+            <p>
+              I believe great software is a mix of <strong>solid engineering and real empathy</strong>
+              for the people using it. Whether it's a REST API handling thousands of requests,
+              a dynamic dashboard, or a carefully crafted UI component — I put the same
+              energy and attention to detail into everything I ship.
+            </p>
+            <p>
+              Currently open to exciting opportunities in <strong>full-stack, backend,
+                and frontend</strong> engineering. Let's build something awesome together!
+            </p>
+          </div>
+          <div class="stat-list">
+            <div class="stat">
+              <div class="num" id="years-exp"></div>
+              <div class="lbl">Years building full-stack</div>
+            </div>
+            <div class="stat">
+              <div class="num">10+</div>
+              <div class="lbl">Projects shipped</div>
+            </div>
+            <div class="stat">
+              <div class="num">3</div>
+              <div class="lbl">Core tech stacks</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STACK ============ -->
+    <section id="stack" class="reveal">
+      <div class="wrap">
+        <div class="sec-head cascade-item">
+          <div>
+            <h2>Stack</h2>
+          </div>
+        </div>
+
+        <div class="stack-diagram crop cascade-item">
+          <span class="cm-tl"></span><span class="cm-tr"></span><span class="cm-bl"></span><span class="cm-br"></span>
+          <svg class="node-svg" viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg">
+            <!-- connections from core to nodes -->
+            <path class="conn flow" d="M450,170 C380,170 320,90 210,70" />
+            <path class="conn flow" d="M450,170 C380,170 320,250 210,270" />
+            <path class="conn" d="M450,170 C400,170 360,170 220,170" />
+            <path class="conn flow" d="M450,170 C520,170 580,90 690,70" />
+            <path class="conn" d="M450,170 C520,170 580,170 680,170" />
+            <path class="conn flow" d="M450,170 C520,170 580,250 690,270" />
+
+            <!-- core -->
+            <circle class="core-ring" cx="450" cy="170" r="46" />
+            <text class="core-label" x="450" y="166" text-anchor="middle">CHRIS</text>
+            <text class="core-label" x="450" y="182" text-anchor="middle" opacity="0.7">TOPHE</text>
+
+            <!-- left column nodes -->
+            <rect class="node-box hot" x="60" y="50" width="150" height="40" rx="2" />
+            <text class="node-text hot" x="135" y="75" text-anchor="middle">Java / Spring Boot</text>
+
+            <rect class="node-box" x="60" y="150" width="150" height="40" rx="2" />
+            <text class="node-text" x="135" y="175" text-anchor="middle">PHP / Laravel</text>
+
+            <rect class="node-box hot" x="60" y="250" width="150" height="40" rx="2" />
+            <text class="node-text hot" x="135" y="275" text-anchor="middle">MySQL / PostgreSQL</text>
+
+            <!-- right column nodes -->
+            <rect class="node-box hot" x="690" y="50" width="150" height="40" rx="2" />
+            <text class="node-text hot" x="765" y="75" text-anchor="middle">JavaScript / React JS</text>
+
+            <rect class="node-box" x="690" y="150" width="150" height="40" rx="2" />
+            <text class="node-text" x="765" y="175" text-anchor="middle">REST APIs / JSON</text>
+
+            <rect class="node-box hot" x="690" y="250" width="150" height="40" rx="2" />
+            <text class="node-text hot" x="765" y="275" text-anchor="middle">Git / GitHub</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section id="projects" class="reveal">
+      <div class="wrap">
+        <div class="sec-head cascade-item">
+          <div>
+            <h2>Selected projects</h2>
+          </div>
+        </div>
+
+        <!-- Populated dynamically by GitHub API -->
+        <div class="projects" id="github-projects"></div>
+
+        <div class="github-cta cascade-item">
+          <a href="https://github.com/Ygtopher" target="_blank" rel="noopener" class="btn ghost">
+            View all on GitHub →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ NOTES ============ -->
+    <section id="notes" class="reveal">
+      <div class="wrap">
+        <div class="sec-head cascade-item">
+          <div>
+            <h2>Notes</h2>
+          </div>
+        </div>
+        <div class="notes">
+          <div class="note cascade-item">
+            <div class="date">AUG 2026</div>
+            <h4>Structuring REST APIs in Spring Boot</h4>
+            <p>My go-to patterns for controllers, DTOs, and global exception handling to keep Java backends clean.</p>
+          </div>
+          <div class="note cascade-item">
+            <div class="date">MAY 2026</div>
+            <h4>React Performance: When to actually memoize</h4>
+            <p>Notes on avoiding unnecessary re-renders and keeping the frontend snappy as the app grows.</p>
+          </div>
+          <div class="note cascade-item">
+            <div class="date">FEB 2026</div>
+            <h4>Modern PHP is actually amazing</h4>
+            <p>Why I still love building with PHP today: strict typing, great frameworks, and rapid development.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ CONTACT / FOOTER ============ -->
+  <footer id="contact" class="reveal">
+    <div class="wrap">
+      <div class="contact-head cascade-item">
+        <h2>Let's build something great together.</h2>
+        <p>Excited about full-stack, backend, and frontend roles — remote or hybrid. I'm always up for interesting
+          projects and collaborations. Reach out!</p>
+      </div>
+      <div class="legend cascade-item">
+        <a href="mailto:nsechris0@gmail.com">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          nsechris0@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/nsengiyumva-christophe-b72261293/" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          Nsengiyumva Christophe
+        </a>
+        <a href="https://www.instagram.com/ygtopher/" target="_blank" rel="noopener">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          ygtopher
+        </a>
+      </div>
+      <div class="foot-bottom">
+        <span>© <span id="copyright-year"></span> Nsengiyumva Christophe — Built with plain HTML/CSS/JS.</span>
+        <span id="clock"></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── GitHub Projects Loader ─────────────────────────────────────────────
+    const GITHUB_USER = 'Ygtopher';
+    const MAX_REPOS   = 8; // max cards to show
+
+    // Map of language names → brand colors
+    const LANG_COLORS = {
+      JavaScript: '#f1e05a', TypeScript: '#3178c6', Java: '#b07219',
+      PHP: '#4f5d95', Python: '#3572A5', HTML: '#e34c26',
+      CSS: '#563d7c', 'C#': '#178600', Ruby: '#701516',
+      Go: '#00ADD8', Rust: '#dea584', Shell: '#89e051',
+      Vue: '#41b883', Svelte: '#ff3e00', Kotlin: '#A97BFF',
+    };
+
+    function langColor(lang) {
+      return LANG_COLORS[lang] || 'var(--ink-faint)';
+    }
+
+    function renderSkeletons(container, n) {
+      container.innerHTML = Array.from({ length: n }, (_, i) =>
+        `<div class="proj-skeleton" style="${i === 0 ? 'border-top:none' : ''}">
+          <div class="skel" style="height:14px;width:40%"></div>
+          <div class="skel" style="height:22px;width:65%"></div>
+          <div class="skel" style="height:14px;width:90%"></div>
+          <div class="skel" style="height:14px;width:75%"></div>
+        </div>`
+      ).join('');
+    }
+
+    function renderRepos(container, repos) {
+      if (!repos.length) {
+        container.innerHTML = '<div class="proj-error">No public repositories found.</div>';
+        return;
+      }
+      container.innerHTML = repos.map((repo, i) => {
+        const num    = String(i + 1).padStart(2, '0');
+        const desc   = repo.description || 'No description provided.';
+        const lang   = repo.language || '';
+        const stars  = repo.stargazers_count;
+        const forks  = repo.forks_count;
+        const updated = new Date(repo.pushed_at).toLocaleDateString('en-GB', { month: 'short', year: 'numeric' }).toUpperCase();
+
+        return `
+        <div class="project">
+          <div class="pnum">${num}</div>
+          <div>
+            <h3>${repo.name.replace(/-/g, ' ').replace(/_/g, ' ')}</h3>
+            <p>${desc}</p>
+            <div class="tags">
+              ${lang ? `<span class="lang-label"><span class="lang-dot" style="background:${langColor(lang)}"></span>${lang}</span>` : ''}
+              ${repo.topics && repo.topics.length ? repo.topics.slice(0,3).map(t => `<span class="tag">${t}</span>`).join('') : ''}
+            </div>
+            <div class="repo-meta">
+              <span>&#9733; ${stars}</span>
+              <span>&#8916; ${forks}</span>
+              <span>Updated ${updated}</span>
+            </div>
+          </div>
+          <div class="plinks">
+            <a href="${repo.html_url}" target="_blank" rel="noopener">GitHub →</a>
+            ${repo.homepage ? `<a href="${repo.homepage}" target="_blank" rel="noopener">Live demo →</a>` : ''}
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    async function loadGitHubProjects() {
+      const container = document.getElementById('github-projects');
+      if (!container) return;
+      renderSkeletons(container, 4);
+      try {
+        const res  = await fetch(
+          `https://api.github.com/users/${GITHUB_USER}/repos?sort=pushed&per_page=100&type=owner`
+        );
+        if (!res.ok) throw new Error(`GitHub API: ${res.status}`);
+        const all  = await res.json();
+        const repos = all
+          .filter(r => !r.fork && !r.archived)
+          .slice(0, MAX_REPOS);
+        renderRepos(container, repos);
+      } catch (err) {
+        container.innerHTML = `
+          <div class="proj-error">
+            Could not load GitHub repositories right now.
+            <a href="https://github.com/${GITHUB_USER}" target="_blank" rel="noopener"
+               style="color:var(--accent);margin-left:8px;">View on GitHub →</a>
+          </div>`;
+      }
+    }
+
+    loadGitHubProjects();
+    const START_YEAR = 2024; // year Christophe started full-stack development
+
+    function updateTimestamps() {
+      const now  = new Date();
+      const year = now.getFullYear();
+
+      // Footer copyright year
+      const copyrightEl = document.getElementById('copyright-year');
+      if (copyrightEl) copyrightEl.textContent = year;
+
+      // Years of experience (counts up from START_YEAR)
+      const yearsEl = document.getElementById('years-exp');
+      if (yearsEl) {
+        const years = year - START_YEAR;
+        yearsEl.textContent = years + '+';
+      }
+    }
+
+    updateTimestamps();
+
+    // ── Live Kigali Time (CAT) clock ──────────────────────────────────
+    const clockEl = document.getElementById('clock');
+    
+    // Create a formatter specifically for Kigali time
+    const timeFormatter = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Africa/Kigali',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    });
+
+    function tick() {
+      const now = new Date();
+      if (clockEl) clockEl.textContent = `KGL ${timeFormatter.format(now)}`;
+    }
+    tick();
+    setInterval(tick, 1000);
+
+    // Re-check timestamps at midnight in case page stays open overnight
+    function msUntilMidnight() {
+      const now = new Date();
+      const midnight = new Date(now);
+      midnight.setHours(24, 0, 0, 0);
+      return midnight - now;
+    }
+    setTimeout(function scheduleMidnight() {
+      updateTimestamps();
+      setInterval(updateTimestamps, 86400000); // then every 24h
+    }, msUntilMidnight());
+
+    // ── Staggered Cascade Animation ───────────────────────────────────────
+    function activateCascade(section) {
+      const items = section.querySelectorAll('.cascade-item');
+      items.forEach((el, i) => {
+        el.style.setProperty('--i', i);
+        // Small rAF delay ensures CSS transition-delay is applied before visible
+        requestAnimationFrame(() => el.classList.add('visible'));
+      });
+    }
+
+    // Hero fires immediately on load (it's always in view)
+    const heroSection = document.querySelector('.hero');
+    if (heroSection) activateCascade(heroSection);
+
+    // All other sections fire when they enter the viewport
+    const cascadeObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          activateCascade(entry.target);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { root: null, rootMargin: '0px 0px -60px 0px', threshold: 0 });
+
+    document.querySelectorAll('section.reveal, footer.reveal').forEach(el => {
+      cascadeObserver.observe(el);
+    });
+
+    // GitHub projects: also stagger cards after they render
+    const originalRenderRepos = renderRepos;
+    // Patch renderRepos to cascade-animate each .project after render
+    function staggerProjects() {
+      const container = document.getElementById('github-projects');
+      if (!container) return;
+      const cards = container.querySelectorAll('.project');
+      cards.forEach((card, i) => {
+        card.classList.add('cascade-item');
+        card.style.setProperty('--i', i + 1); // offset by 1 since sec-head is 0
+        requestAnimationFrame(() => card.classList.add('visible'));
+      });
+    }
+
+    // Watch the projects container for DOM mutations (when GitHub API renders)
+    const projContainer = document.getElementById('github-projects');
+    if (projContainer) {
+      const mutObs = new MutationObserver(() => {
+        staggerProjects();
+        mutObs.disconnect();
+      });
+      mutObs.observe(projContainer, { childList: true });
+    }
+  </script>
+
+</body>
+
+</html>
