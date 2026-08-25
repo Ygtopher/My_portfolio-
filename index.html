@@ -148,10 +148,22 @@
       position: sticky;
       top: 0;
       z-index: 150;
-      background: rgba(11, 37, 69, 0.85);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--line);
+      /* NOTE: do NOT set backdrop-filter here — it creates a stacking
+         context that clips position:fixed children (the mobile overlay).
+         Instead, use ::before so the blur is cosmetic-only.           */
+    }
+
+    /* The blurred glass effect lives on a pseudo-element so the
+       header itself does NOT create a stacking context.            */
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: rgba(11, 37, 69, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
     }
 
     nav.wrap {
@@ -968,22 +980,22 @@
   <header>
     <nav class="wrap">
       <div class="logo"><span class="dot"></span> NC / DEVELOPER</div>
-      <!-- hamburger button — z-index 300 keeps it above the overlay -->
+
+      <!-- Desktop links (hidden on mobile via media query) -->
+      <div class="navlinks" id="navlinks">
+        <a href="#about"    onclick="closeNav()">About</a>
+        <a href="#stack"    onclick="closeNav()">Stack</a>
+        <a href="#projects" onclick="closeNav()">Projects</a>
+        <a href="#notes"    onclick="closeNav()">Notes</a>
+        <a href="#contact"  class="resume-link" onclick="closeNav()">Contact &rarr;</a>
+      </div>
+
+      <!-- Hamburger (visible on mobile only, z-index 300 keeps it above overlay) -->
       <button class="navtoggle" id="navtoggle" aria-label="Toggle navigation" onclick="toggleNav()">
         <span></span><span></span><span></span>
       </button>
     </nav>
   </header>
-
-  <!-- Mobile nav overlay — must be OUTSIDE <header> so backdrop-filter
-       on header does not clip this element to header height -->
-  <div class="navlinks" id="navlinks">
-    <a href="#about"   onclick="closeNav()">About</a>
-    <a href="#stack"   onclick="closeNav()">Stack</a>
-    <a href="#projects" onclick="closeNav()">Projects</a>
-    <a href="#notes"   onclick="closeNav()">Notes</a>
-    <a href="#contact" class="resume-link" onclick="closeNav()">Contact &rarr;</a>
-  </div>
 
   <main>
 
