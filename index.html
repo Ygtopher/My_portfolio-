@@ -147,9 +147,10 @@
     header {
       position: sticky;
       top: 0;
-      z-index: 50;
-      background: rgba(11, 37, 69, 0.82);
-      backdrop-filter: blur(10px);
+      z-index: 150;
+      background: rgba(11, 37, 69, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--line);
     }
 
@@ -218,7 +219,30 @@
 
     .navtoggle {
       display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: 1px solid var(--line-strong);
+      border-radius: var(--radius);
+      padding: 10px 12px;
+      cursor: pointer;
+      position: relative;
+      z-index: 300;
     }
+
+    .navtoggle span {
+      display: block;
+      width: 20px;
+      height: 1.5px;
+      background: var(--ink);
+      transition: transform 0.3s, opacity 0.3s;
+      transform-origin: center;
+    }
+
+    /* Hamburger → X animation */
+    .navtoggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .navtoggle.open span:nth-child(2) { opacity: 0; }
+    .navtoggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
     /* ============================================================
    HERO — title block styled like a technical drawing stamp
@@ -257,14 +281,16 @@
       filter: brightness(0.95) contrast(1.05);
     }
 
-    @media(max-width:860px) {
+    /* Hero responsive — stacks photo below text on mobile */
+    @media (max-width: 860px) {
       .hero-inner {
         grid-template-columns: 1fr;
+        gap: 40px;
       }
-
       .hero-avatar {
-        width: 200px;
+        width: 220px;
         margin: 0 auto;
+        order: -1; /* photo goes above text */
       }
     }
 
@@ -772,18 +798,47 @@
     }
 
     /* ============================================================
-   RESPONSIVE
-   ============================================================ */
+       RESPONSIVE — 860px (tablet)
+       ============================================================ */
     @media (max-width: 860px) {
+
+      /* Nav overlay — sits outside header so backdrop-filter
+         on <header> cannot clip it to header height.           */
       .navlinks {
         display: none;
+        position: fixed;
+        inset: 0;                       /* covers full screen */
+        background: rgba(7, 25, 48, 0.97);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 40px;
+        font-size: 22px;
+        z-index: 100;                   /* below navtoggle (300) */
+        animation: none;
+      }
+      .navlinks.open {
+        display: flex;
+        animation: fadeIn 0.25s ease;
+      }
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+      .navlinks a { font-size: 22px; }
+      .navlinks a::after { display: none; } /* no underline indicator in overlay */
+
+      .navtoggle {
+        display: flex;
+        position: relative;
+        z-index: 300;                   /* always above the overlay */
       }
 
+      /* About */
       .about-grid {
         grid-template-columns: 1fr;
         gap: 40px;
       }
-
       .stat-list {
         flex-direction: row;
         flex-wrap: wrap;
@@ -792,42 +847,84 @@
         border-top: 1px solid var(--line-strong);
         padding-top: 24px;
       }
+      .stat { min-width: 80px; }
 
+      /* Title block: 2 cols on tablet */
       .titleblock {
         grid-template-columns: repeat(2, 1fr);
       }
-
       .titleblock .cell:nth-child(2n) {
         border-right: none;
       }
-
       .titleblock .cell:nth-child(-n+2) {
         border-bottom: 1px solid var(--line);
       }
 
+      /* Projects: single column */
       .project {
         grid-template-columns: 1fr;
         gap: 12px;
       }
-
       .project .plinks {
         align-items: flex-start;
         text-align: left;
         flex-direction: row;
         gap: 20px;
       }
+      .project .pnum { display: none; }
 
+      /* Notes: 2 cols on tablet */
       .notes {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .wrap   { padding: 0 20px; }
+      section { padding: 72px 0; }
+    }
+
+    /* ============================================================
+       RESPONSIVE — 480px (mobile)
+       ============================================================ */
+    @media (max-width: 480px) {
+
+      /* Hero */
+      .hero { padding: 64px 0 56px; }
+      .hero-avatar { width: 160px; }
+      .hero h1 { font-size: clamp(30px, 9vw, 48px); }
+      .hero p.lede { font-size: 15px; margin-top: 20px; }
+      .hero-cta {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .btn { width: 100%; justify-content: center; box-sizing: border-box; }
+
+      /* Title block: 1 col on mobile */
+      .titleblock {
         grid-template-columns: 1fr;
       }
-
-      .wrap {
-        padding: 0 20px;
+      .titleblock .cell {
+        border-right: none;
+        border-bottom: 1px solid var(--line);
       }
+      .titleblock .cell:last-child { border-bottom: none; }
 
-      section {
-        padding: 72px 0;
-      }
+      /* Notes: single column */
+      .notes { grid-template-columns: 1fr; }
+
+      /* Projects */
+      .project h3 { font-size: 18px; }
+      .repo-meta { flex-wrap: wrap; gap: 8px; }
+
+      /* Stack diagram scrollable on tiny screens */
+      .stack-diagram { overflow-x: auto; padding: 16px; }
+      .node-svg { min-width: 480px; }
+
+      /* Footer */
+      .legend { flex-direction: column; }
+      .legend a { width: 100%; box-sizing: border-box; }
+      .foot-bottom { flex-direction: column; text-align: center; gap: 6px; }
+
+      section { padding: 56px 0; }
     }
 
     /* ============================================================
@@ -871,15 +968,22 @@
   <header>
     <nav class="wrap">
       <div class="logo"><span class="dot"></span> NC / DEVELOPER</div>
-      <div class="navlinks">
-        <a href="#about">About</a>
-        <a href="#stack">Stack</a>
-        <a href="#projects">Projects</a>
-        <a href="#notes">Notes</a>
-        <a href="#contact" class="resume-link">Contact →</a>
-      </div>
+      <!-- hamburger button — z-index 300 keeps it above the overlay -->
+      <button class="navtoggle" id="navtoggle" aria-label="Toggle navigation" onclick="toggleNav()">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
   </header>
+
+  <!-- Mobile nav overlay — must be OUTSIDE <header> so backdrop-filter
+       on header does not clip this element to header height -->
+  <div class="navlinks" id="navlinks">
+    <a href="#about"   onclick="closeNav()">About</a>
+    <a href="#stack"   onclick="closeNav()">Stack</a>
+    <a href="#projects" onclick="closeNav()">Projects</a>
+    <a href="#notes"   onclick="closeNav()">Notes</a>
+    <a href="#contact" class="resume-link" onclick="closeNav()">Contact &rarr;</a>
+  </div>
 
   <main>
 
@@ -1296,6 +1400,20 @@
         mutObs.disconnect();
       });
       mutObs.observe(projContainer, { childList: true });
+    }
+    // ── Mobile Navigation Toggle ─────────────────────────────────────────
+    function toggleNav() {
+      const links  = document.getElementById('navlinks');
+      const toggle = document.getElementById('navtoggle');
+      links.classList.toggle('open');
+      toggle.classList.toggle('open');
+      // Prevent body scroll when menu is open
+      document.body.style.overflow = links.classList.contains('open') ? 'hidden' : '';
+    }
+    function closeNav() {
+      document.getElementById('navlinks').classList.remove('open');
+      document.getElementById('navtoggle').classList.remove('open');
+      document.body.style.overflow = '';
     }
   </script>
 
