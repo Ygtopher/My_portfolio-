@@ -20,19 +20,49 @@
       --bg: #030712;
       --bg-alt: #111827;
       --bg-panel: rgba(255, 255, 255, 0.03);
-      --line: rgba(255, 255, 255, 0.08);
-      --line-strong: rgba(255, 255, 255, 0.15);
+      --line: rgba(255, 255, 255, 0.15); /* Darker lines for better visibility */
+      --line-strong: rgba(255, 255, 255, 0.3);
       --ink: #F9FAFB;
       --ink-dim: #9CA3AF;
       --ink-faint: #4B5563;
       --accent: #FFD166;
       --accent-2: #5BC0BE;
       --accent-glow: rgba(91, 192, 190, 0.15);
+      --bg-glass: rgba(3, 7, 18, 0.88);
+      --nav-overlay: rgba(3, 7, 18, 0.97);
+      --btn-bg: rgba(255, 255, 255, 0.02);
+      --btn-hover: rgba(255, 255, 255, 0.05);
+      --btn-text-primary: #030712;
+      --accent-shadow: rgba(255, 209, 102, 0.15);
+      --accent-shadow-hover: rgba(255, 209, 102, 0.3);
+      --accent-2-shadow: rgba(91, 192, 190, 0.1);
       --radius: 8px;
       --display: 'Space Grotesk', sans-serif;
       --body: 'Inter', sans-serif;
       --mono: 'JetBrains Mono', monospace;
       --max: 1120px;
+    }
+
+    [data-theme="light"] {
+      --bg: #F4F4F5; /* Soft paper gray, not stark white */
+      --bg-alt: #E4E4E7;
+      --bg-panel: rgba(255, 255, 255, 0.6); /* Frosted glass effect */
+      --line: rgba(0, 0, 0, 0.15); /* Darker lines for better visibility */
+      --line-strong: rgba(0, 0, 0, 0.3);
+      --ink: #27272A; /* Softer text, reduces eye strain */
+      --ink-dim: #52525B;
+      --ink-faint: #A1A1AA;
+      --accent: #2563EB; /* Readable, vibrant blue */
+      --accent-2: #059669; /* Readable green */
+      --accent-glow: rgba(37, 99, 235, 0.08); /* Very soft glow */
+      --bg-glass: rgba(244, 244, 245, 0.88);
+      --nav-overlay: rgba(244, 244, 245, 0.97);
+      --btn-bg: rgba(0, 0, 0, 0.03);
+      --btn-hover: rgba(0, 0, 0, 0.08);
+      --btn-text-primary: #FFFFFF;
+      --accent-shadow: rgba(37, 99, 235, 0.2);
+      --accent-shadow-hover: rgba(37, 99, 235, 0.35);
+      --accent-2-shadow: rgba(5, 150, 105, 0.15);
     }
 
     * {
@@ -172,7 +202,7 @@
       position: absolute;
       inset: 0;
       z-index: -1;
-      background: rgba(11, 37, 69, 0.88);
+      background: var(--bg-glass);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
     }
@@ -267,6 +297,22 @@
     .navtoggle.open span:nth-child(2) { opacity: 0; }
     .navtoggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
+    /* Theme Toggle Button */
+    .theme-toggle {
+      background: none;
+      border: none;
+      color: var(--ink-dim);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s;
+    }
+    .theme-toggle:hover { color: var(--accent); }
+    .icon-moon { display: none; }
+    [data-theme="light"] .icon-sun { display: none; }
+    [data-theme="light"] .icon-moon { display: block; }
+
     /* ============================================================
    HERO — title block styled like a technical drawing stamp
    ============================================================ */
@@ -294,11 +340,11 @@
       display: block;
       object-fit: cover;
       mask-image:
-        linear-gradient(to right, transparent 0%, black 22%, black 78%, transparent 100%),
-        linear-gradient(to bottom, transparent 0%, black 18%, black 60%, transparent 100%);
+        linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%, black 4%, black 75%, transparent 100%);
       -webkit-mask-image:
-        linear-gradient(to right, transparent 0%, black 22%, black 78%, transparent 100%),
-        linear-gradient(to bottom, transparent 0%, black 18%, black 60%, transparent 100%);
+        linear-gradient(to right, transparent 0%, black 5%, black 95%, transparent 100%),
+        linear-gradient(to bottom, transparent 0%, black 4%, black 75%, transparent 100%);
       mask-composite: intersect;
       -webkit-mask-composite: source-in;
       filter: brightness(0.95) contrast(1.05);
@@ -368,34 +414,33 @@
       align-items: center;
       gap: 10px;
       transition: all 0.3s ease;
-      background: rgba(255, 255, 255, 0.02);
+      background: var(--btn-bg);
     }
 
     .btn:hover {
       transform: translateY(-2px);
-      background: rgba(255, 255, 255, 0.05);
+      background: var(--btn-hover);
       border-color: var(--ink-dim);
     }
 
     .btn.primary {
       background: var(--accent);
-      color: #030712;
+      color: var(--btn-text-primary);
       border-color: var(--accent);
       font-weight: 600;
-      box-shadow: 0 0 20px rgba(255, 209, 102, 0.15);
+      box-shadow: 0 0 20px var(--accent-shadow);
     }
 
     .btn.primary:hover {
-      background: #ffdb85;
-      box-shadow: 0 0 30px rgba(255, 209, 102, 0.3);
-      border-color: #ffdb85;
+      filter: brightness(1.1);
+      box-shadow: 0 0 30px var(--accent-shadow-hover);
     }
 
     .btn.ghost:hover {
       border-color: var(--accent-2);
       color: var(--accent-2);
-      background: rgba(91, 192, 190, 0.05);
-      box-shadow: 0 0 20px rgba(91, 192, 190, 0.1);
+      background: rgba(141, 169, 196, 0.05); /* Using a generic soft background */
+      box-shadow: 0 0 20px var(--accent-2-shadow);
     }
 
     /* title block: bottom-right stamp, like a blueprint's info box */
@@ -891,7 +936,7 @@
         display: none;
         position: fixed;
         inset: 0;                       /* covers full screen */
-        background: rgba(7, 25, 48, 0.97);
+        background: var(--nav-overlay);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
         flex-direction: column;
@@ -1062,10 +1107,20 @@
         <a href="#contact"  class="resume-link" onclick="closeNav()">Contact &rarr;</a>
       </div>
 
-      <!-- Hamburger (visible on mobile only, z-index 300 keeps it above overlay) -->
-      <button class="navtoggle" id="navtoggle" aria-label="Toggle navigation" onclick="toggleNav()">
-        <span></span><span></span><span></span>
-      </button>
+      <div style="display: flex; align-items: center; gap: 20px;">
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+        <!-- Hamburger (visible on mobile only, z-index 300 keeps it above overlay) -->
+        <button class="navtoggle" id="navtoggle" aria-label="Toggle navigation" onclick="toggleNav()">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </nav>
   </header>
 
@@ -1516,6 +1571,23 @@
       document.getElementById('navtoggle').classList.remove('open');
       document.body.style.overflow = '';
     }
+
+    // ── Theme Toggle Logic ───────────────────────────────────────────────
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+
+    if (currentTheme === 'light') {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      let targetTheme = 'light';
+      if (document.documentElement.getAttribute('data-theme') === 'light') {
+        targetTheme = 'dark';
+      }
+      document.documentElement.setAttribute('data-theme', targetTheme);
+      localStorage.setItem('theme', targetTheme);
+    });
   </script>
 
 </body>
