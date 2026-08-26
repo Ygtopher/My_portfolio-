@@ -1517,6 +1517,30 @@
   </footer>
 
   <script>
+    // ── Matrix Scramble Text Effect ──────────────────────────────────────
+    const scrambleEl = document.querySelector('.hero h1 .line2');
+    if (scrambleEl) {
+      const originalText = scrambleEl.textContent.trim();
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!<>-_\\\\/[]{}—=+*^?#_';
+      let iteration = 0;
+      
+      const scrambleInterval = setInterval(() => {
+        scrambleEl.textContent = originalText
+          .split('')
+          .map((char, index) => {
+            if(index < iteration) return originalText[index];
+            return chars[Math.floor(Math.random() * chars.length)];
+          })
+          .join('');
+          
+        if(iteration >= originalText.length) {
+          clearInterval(scrambleInterval);
+          scrambleEl.textContent = originalText;
+        }
+        iteration += 1;
+      }, 25);
+    }
+
     // ── Custom Cursor Logic ──────────────────────────────────────────────
     const cursor = document.getElementById('custom-cursor');
     if (cursor && !window.matchMedia('(max-width: 860px)').matches) {
@@ -1796,6 +1820,25 @@
         card.classList.add('cascade-item');
         card.style.setProperty('--i', i + 1); // offset by 1 since sec-head is 0
         requestAnimationFrame(() => card.classList.add('visible'));
+
+        // Apply 3D Tilt Effect
+        card.addEventListener('mousemove', (e) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          const centerX = rect.width / 2;
+          const centerY = rect.height / 2;
+          const tiltX = ((y - centerY) / centerY) * -4; // Max 4 deg rotation
+          const tiltY = ((x - centerX) / centerX) * 4;
+          
+          card.style.transition = 'transform 0.1s ease-out, box-shadow 0.3s ease, background 0.3s ease';
+          card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-2px)`;
+        });
+        
+        card.addEventListener('mouseleave', () => {
+          card.style.transition = 'all 0.5s ease';
+          card.style.transform = ''; // clears inline style, returns to CSS default
+        });
       });
     }
 
