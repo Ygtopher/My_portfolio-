@@ -1104,8 +1104,8 @@
       box-shadow: 0 0 10px var(--accent);
     }
 
-    body { cursor: none; }
-    a, button, input, textarea, select { cursor: none; }
+    /* Hide ALL default OS cursors — our custom icon replaces everything */
+    * { cursor: none !important; }
 
     .custom-cursor {
       position: fixed;
@@ -1516,13 +1516,25 @@
     // ── Custom Cursor Logic ──────────────────────────────────────────────
     const cursor = document.getElementById('custom-cursor');
     if (cursor && !window.matchMedia('(max-width: 860px)').matches) {
+      // Move cursor with mouse
       document.addEventListener('mousemove', (e) => {
         requestAnimationFrame(() => {
-          // Position at mouse tip (top-left of icon)
           cursor.style.left = e.clientX + 'px';
           cursor.style.top  = e.clientY + 'px';
         });
       });
+
+      // Hide when mouse leaves browser window
+      document.addEventListener('mouseleave', () => {
+        cursor.style.opacity = '0';
+      });
+
+      // Show when mouse re-enters browser window
+      document.addEventListener('mouseenter', () => {
+        cursor.style.opacity = '0.9';
+      });
+
+      // Grow/glow on hover over interactive elements
       const interactables = document.querySelectorAll('a, button, input, textarea, .tech-card');
       interactables.forEach(el => {
         el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
