@@ -1593,15 +1593,15 @@
       localStorage.setItem('theme', targetTheme);
     });
 
-    // Automatically respond to system theme changes if user hasn't saved a preference
+    // Automatically respond to system theme changes (overrides saved preference)
     prefersLight.addEventListener('change', (e) => {
-      if (!localStorage.getItem('theme')) {
-        if (e.matches) {
-          document.documentElement.setAttribute('data-theme', 'light');
-        } else {
-          document.documentElement.removeAttribute('data-theme');
-        }
+      const newTheme = e.matches ? 'light' : 'dark';
+      if (newTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
       }
+      localStorage.setItem('theme', newTheme);
     });
   </script>
 
