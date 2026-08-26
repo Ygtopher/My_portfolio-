@@ -1574,9 +1574,13 @@
 
     // ── Theme Toggle Logic ───────────────────────────────────────────────
     const themeToggleBtn = document.getElementById('theme-toggle');
-    const currentTheme = localStorage.getItem('theme') || 'dark';
-
-    if (currentTheme === 'light') {
+    const prefersLight = window.matchMedia('(prefers-color-scheme: light)');
+    
+    // Check local storage first, fallback to system preference
+    const savedTheme = localStorage.getItem('theme');
+    const defaultTheme = savedTheme ? savedTheme : (prefersLight.matches ? 'light' : 'dark');
+    
+    if (defaultTheme === 'light') {
       document.documentElement.setAttribute('data-theme', 'light');
     }
 
@@ -1587,6 +1591,17 @@
       }
       document.documentElement.setAttribute('data-theme', targetTheme);
       localStorage.setItem('theme', targetTheme);
+    });
+
+    // Automatically respond to system theme changes if user hasn't saved a preference
+    prefersLight.addEventListener('change', (e) => {
+      if (!localStorage.getItem('theme')) {
+        if (e.matches) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+        }
+      }
     });
   </script>
 
