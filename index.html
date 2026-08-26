@@ -243,6 +243,8 @@
     .navlinks a {
       position: relative;
       transition: color 0.2s;
+      padding: 12px 16px;       /* wide clickable area */
+      margin: -12px -16px;      /* cancel out layout shift from padding */
     }
 
     .navlinks a:hover {
@@ -252,9 +254,9 @@
     .navlinks a::after {
       content: '';
       position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -6px;
+      left: 16px;
+      right: 16px;
+      bottom: 6px;
       height: 1px;
       background: var(--accent);
       transform: scaleX(0);
