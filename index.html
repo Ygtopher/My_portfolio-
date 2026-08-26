@@ -1080,6 +1080,127 @@
       }
     }
 
+    /* ============================================================
+    NEW PREMIUM FEATURES (Scrollbar, Cursor, Tooltips, Form)
+    ============================================================ */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb {
+      background: var(--line-strong);
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+    #scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: var(--accent);
+      z-index: 10000;
+      width: 0%;
+      box-shadow: 0 0 10px var(--accent);
+    }
+
+    .custom-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+      transition: width 0.2s, height 0.2s, background-color 0.2s;
+    }
+    .custom-cursor.hovering {
+      width: 48px;
+      height: 48px;
+      background-color: var(--accent-glow);
+    }
+    @media (max-width: 860px) {
+      .custom-cursor { display: none; }
+    }
+
+    .stack-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .tech-card {
+      position: relative;
+      border: 1px solid var(--line);
+      padding: 16px 24px;
+      border-radius: var(--radius);
+      background: var(--bg-panel);
+      font-family: var(--mono);
+      font-size: 14px;
+      color: var(--ink);
+      cursor: default;
+      transition: all 0.3s ease;
+    }
+    .tech-card:hover {
+      border-color: var(--accent-2);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px var(--accent-2-shadow);
+      color: var(--accent-2);
+    }
+    .tech-card .tooltip {
+      position: absolute;
+      bottom: 110%;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: var(--bg-alt);
+      color: var(--ink);
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      border: 1px solid var(--line-strong);
+      z-index: 10;
+    }
+    .tech-card:hover .tooltip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 500px;
+      margin-top: 40px;
+      margin-bottom: 40px;
+    }
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--bg-panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      color: var(--ink);
+      font-family: var(--body);
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 10px var(--accent-shadow);
+    }
+
     /* focus visibility */
     a:focus-visible,
     .btn:focus-visible {
@@ -1235,42 +1356,27 @@
           </div>
         </div>
 
-        <div class="stack-diagram crop cascade-item">
-          <span class="cm-tl"></span><span class="cm-tr"></span><span class="cm-bl"></span><span class="cm-br"></span>
-          <svg class="node-svg" viewBox="0 0 900 340" xmlns="http://www.w3.org/2000/svg">
-            <!-- connections from core to nodes -->
-            <path class="conn flow" d="M450,170 C380,170 320,90 210,70" />
-            <path class="conn flow" d="M450,170 C380,170 320,250 210,270" />
-            <path class="conn" d="M450,170 C400,170 360,170 220,170" />
-            <path class="conn flow" d="M450,170 C520,170 580,90 690,70" />
-            <path class="conn" d="M450,170 C520,170 580,170 680,170" />
-            <path class="conn flow" d="M450,170 C520,170 580,250 690,270" />
-
-            <!-- core -->
-            <circle class="core-ring" cx="450" cy="170" r="46" />
-            <text class="core-label" x="450" y="166" text-anchor="middle">CHRIS</text>
-            <text class="core-label" x="450" y="182" text-anchor="middle" opacity="0.7">TOPHE</text>
-
-            <!-- left column nodes -->
-            <rect class="node-box hot" x="60" y="50" width="150" height="40" rx="2" />
-            <text class="node-text hot" x="135" y="75" text-anchor="middle">Java / Spring Boot</text>
-
-            <rect class="node-box" x="60" y="150" width="150" height="40" rx="2" />
-            <text class="node-text" x="135" y="175" text-anchor="middle">PHP / Laravel</text>
-
-            <rect class="node-box hot" x="60" y="250" width="150" height="40" rx="2" />
-            <text class="node-text hot" x="135" y="275" text-anchor="middle">MySQL / PostgreSQL</text>
-
-            <!-- right column nodes -->
-            <rect class="node-box hot" x="690" y="50" width="150" height="40" rx="2" />
-            <text class="node-text hot" x="765" y="75" text-anchor="middle">JavaScript / React JS</text>
-
-            <rect class="node-box" x="690" y="150" width="150" height="40" rx="2" />
-            <text class="node-text" x="765" y="175" text-anchor="middle">REST APIs / JSON</text>
-
-            <rect class="node-box hot" x="690" y="250" width="150" height="40" rx="2" />
-            <text class="node-text hot" x="765" y="275" text-anchor="middle">Git / GitHub</text>
-          </svg>
+        <div class="stack-grid cascade-item">
+          <div class="tech-card">
+            Java / Spring Boot
+            <div class="tooltip">Enterprise Backends & REST APIs</div>
+          </div>
+          <div class="tech-card">
+            PHP / Laravel
+            <div class="tooltip">Rapid Web App Development</div>
+          </div>
+          <div class="tech-card">
+            JavaScript / React JS
+            <div class="tooltip">Interactive Frontend UIs</div>
+          </div>
+          <div class="tech-card">
+            MySQL / PostgreSQL
+            <div class="tooltip">Relational Database Design</div>
+          </div>
+          <div class="tech-card">
+            Git / GitHub
+            <div class="tooltip">Version Control & CI/CD</div>
+          </div>
         </div>
       </div>
     </section>
@@ -1333,6 +1439,16 @@
         <p>Excited about full-stack, backend, and frontend roles — remote or hybrid. I'm always up for interesting
           projects and collaborations. Reach out!</p>
       </div>
+
+      <form action="https://api.web3forms.com/submit" method="POST" class="contact-form cascade-item">
+        <!-- Replace YOUR_ACCESS_KEY_HERE with your Web3Forms access key -->
+        <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message..." required></textarea>
+        <button type="submit" class="btn primary" style="width: 100%; justify-content: center;">Send Message &rarr;</button>
+      </form>
+
       <div class="legend cascade-item">
         <a href="mailto:nsechris0@gmail.com">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
@@ -1355,6 +1471,33 @@
   </footer>
 
   <script>
+    // ── Custom Cursor Logic ──────────────────────────────────────────────
+    const cursor = document.getElementById('custom-cursor');
+    if (cursor && !window.matchMedia('(max-width: 860px)').matches) {
+      document.addEventListener('mousemove', (e) => {
+        requestAnimationFrame(() => {
+          cursor.style.left = e.clientX + 'px';
+          cursor.style.top = e.clientY + 'px';
+        });
+      });
+      const interactables = document.querySelectorAll('a, button, input, textarea, .tech-card');
+      interactables.forEach(el => {
+        el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+        el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+      });
+    }
+
+    // ── Scroll Progress Bar ──────────────────────────────────────────────
+    const scrollProgress = document.getElementById('scroll-progress');
+    if (scrollProgress) {
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.body.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        scrollProgress.style.width = scrollPercent + '%';
+      });
+    }
+
     // ── GitHub Projects Loader ─────────────────────────────────────────────
     const GITHUB_USER = 'Ygtopher';
     const MAX_REPOS   = 8; // max cards to show
