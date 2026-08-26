@@ -1118,7 +1118,7 @@
       z-index: 9999;
       transition: transform 0.15s ease, filter 0.2s ease, opacity 0.2s;
       filter: drop-shadow(0 0 4px var(--accent));
-      opacity: 0.9;
+      opacity: 1;
     }
     .custom-cursor svg path,
     .custom-cursor svg rect {
@@ -1526,12 +1526,12 @@
 
       // Hide when mouse leaves browser window
       document.addEventListener('mouseleave', () => {
-        cursor.style.opacity = '0';
+        cursor.style.display = 'none';
       });
 
       // Show when mouse re-enters browser window
       document.addEventListener('mouseenter', () => {
-        cursor.style.opacity = '0.9';
+        cursor.style.display = 'block';
       });
 
       // Grow/glow on hover over interactive elements
