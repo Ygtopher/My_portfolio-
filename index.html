@@ -232,6 +232,50 @@
       box-shadow: 0 0 8px var(--accent);
     }
 
+    /* ── Status Indicator ── */
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: #22c55e;
+      border: 1px solid rgba(34, 197, 94, 0.3);
+      background: rgba(34, 197, 94, 0.08);
+      padding: 5px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .status-badge .ping {
+      position: relative;
+      width: 8px;
+      height: 8px;
+      flex-shrink: 0;
+    }
+    .status-badge .ping::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: ping 1.8s ease-out infinite;
+    }
+    .status-badge .ping::after {
+      content: '';
+      position: absolute;
+      inset: 1px;
+      border-radius: 50%;
+      background: #22c55e;
+    }
+    @keyframes ping {
+      0%   { transform: scale(1);   opacity: 0.8; }
+      70%  { transform: scale(2.2); opacity: 0; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+    @media (max-width: 600px) {
+      .status-badge { display: none; }
+    }
+
     .navlinks {
       display: flex;
       gap: 32px;
@@ -1248,6 +1292,10 @@
   <header>
     <nav class="wrap">
       <a href="#" class="logo" aria-label="Back to top"><span class="dot"></span> NC / DEVELOPER</a>
+      <div class="status-badge">
+        <span class="ping"></span>
+        Open to work
+      </div>
 
       <!-- Desktop links (hidden on mobile via media query) -->
       <div class="navlinks" id="navlinks">
@@ -1883,6 +1931,26 @@
     });
 
     apply3DTilt(document.querySelectorAll('.btn, .tech-card, .note, .stat'));
+
+    // ── Magnetic Buttons ─────────────────────────────────────────────────
+    document.querySelectorAll('.btn').forEach(btn => {
+      const strength = 0.35; // how strong the magnetic pull is (0 = none, 1 = full)
+
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top  + rect.height / 2;
+        const dx = (e.clientX - cx) * strength;
+        const dy = (e.clientY - cy) * strength;
+        btn.style.transition = 'transform 0.15s ease-out';
+        btn.style.transform  = `translate(${dx}px, ${dy}px)`;
+      });
+
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transition = 'transform 0.5s cubic-bezier(0.23,1,0.32,1)';
+        btn.style.transform  = 'translate(0, 0)';
+      });
+    });
   </script>
 
 </body>
