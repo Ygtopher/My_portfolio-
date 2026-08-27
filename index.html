@@ -1558,11 +1558,116 @@
         </a>
       </div>
       <div class="foot-bottom">
-        <span>© <span id="copyright-year"></span> Nsengiyumva Christophe — Built with plain HTML/CSS/JS.</span>
+        <span style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          <span style="color:var(--ink-dim);font-family:var(--mono);font-size:12px;">© <span id="copyright-year"></span> Nsengiyumva Christophe — Built with</span>
+          <span class="bw-chip" data-color="#e34c26"
+            data-icon='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/></svg>'
+            data-name="HTML5" data-desc="Semantic structure. No framework needed.">HTML</span>
+          <span class="bw-chip" data-color="#264de4"
+            data-icon='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11h-2.61l.29 3.855L12 19.288l5.373-1.53L18.59 4.414z"/></svg>'
+            data-name="CSS3" data-desc="Animations, Grid, Glassmorphism.">CSS</span>
+          <span class="bw-chip" data-color="#f7df1e"
+            data-icon='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z"/></svg>'
+            data-name="JavaScript" data-desc="Zero deps. Vanilla JS for max performance.">JavaScript</span>
+        </span>
         <span id="clock"></span>
       </div>
     </div>
   </footer>
+
+  <style>
+    /* ── Tech Badge Tooltips (footer) ── */
+    /* ── Built-With Chips ── */
+    .bw-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid;
+      letter-spacing: 0.05em;
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .bw-chip svg { width: 12px; height: 12px; }
+    .bw-chip:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Rich Tooltip Card */
+    .bw-tooltip {
+      position: fixed;
+      z-index: 10000;
+      background: var(--bg-glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      padding: 14px 16px;
+      min-width: 200px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.04);
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(8px) scale(0.96);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .bw-tooltip.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    .bw-tooltip-bar {
+      height: 3px;
+      border-radius: 2px;
+      margin-bottom: 12px;
+    }
+    .bw-tooltip-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .bw-tooltip-icon {
+      width: 22px;
+      height: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .bw-tooltip-icon svg { width: 18px; height: 18px; }
+    .bw-tooltip-name {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .bw-tooltip-desc {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--ink-dim);
+      line-height: 1.5;
+    }
+
+    /* ── Cursor Particle Trail ── */
+    .cursor-particle {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      background: var(--accent);
+      box-shadow: 0 0 6px var(--accent), 0 0 12px var(--accent-glow);
+      transform: translate(-50%, -50%);
+      animation: particle-fade 0.6s ease-out forwards;
+    }
+    @keyframes particle-fade {
+      0%   { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 0;   transform: translate(-50%, -50%) scale(0); }
+    }
+  </style>
 
   <script>
 
@@ -1934,8 +2039,7 @@
 
     // ── Magnetic Buttons ─────────────────────────────────────────────────
     document.querySelectorAll('.btn').forEach(btn => {
-      const strength = 0.35; // how strong the magnetic pull is (0 = none, 1 = full)
-
+      const strength = 0.35;
       btn.addEventListener('mousemove', (e) => {
         const rect = btn.getBoundingClientRect();
         const cx = rect.left + rect.width / 2;
@@ -1945,12 +2049,79 @@
         btn.style.transition = 'transform 0.15s ease-out';
         btn.style.transform  = `translate(${dx}px, ${dy}px)`;
       });
-
       btn.addEventListener('mouseleave', () => {
         btn.style.transition = 'transform 0.5s cubic-bezier(0.23,1,0.32,1)';
         btn.style.transform  = 'translate(0, 0)';
       });
     });
+
+    // ── Particle Trail Effect ───────────────────────────────────────────
+    if (!window.matchMedia('(max-width: 860px)').matches) {
+      let lastParticleTime = 0;
+      const PARTICLE_INTERVAL = 40; // ms between particles (lower = more dense)
+
+      document.addEventListener('mousemove', (e) => {
+        const now = Date.now();
+        if (now - lastParticleTime < PARTICLE_INTERVAL) return;
+        lastParticleTime = now;
+
+        const p = document.createElement('div');
+        p.className = 'cursor-particle';
+        // Slightly randomize position around cursor for a sparkle effect
+        const offset = () => (Math.random() - 0.5) * 10;
+        p.style.left = (e.clientX + offset()) + 'px';
+        p.style.top  = (e.clientY + offset()) + 'px';
+        // Randomize size a bit
+        const size = 3 + Math.random() * 5;
+        p.style.width  = size + 'px';
+        p.style.height = size + 'px';
+        document.body.appendChild(p);
+
+        // Remove after animation completes
+        setTimeout(() => p.remove(), 600);
+      });
+    }
+
+    // ── Built-With Chips & Rich Tooltips ─────────────────────────────────
+    const bwTooltip = document.createElement('div');
+    bwTooltip.className = 'bw-tooltip';
+    document.body.appendChild(bwTooltip);
+
+    document.querySelectorAll('.bw-chip').forEach(chip => {
+      const color = chip.dataset.color;
+
+      // Style the chip with its brand color
+      chip.style.color = color;
+      chip.style.borderColor = color + '55';
+      chip.style.background = color + '18';
+      chip.style.boxShadow = `0 0 10px ${color}22`;
+
+      // Inject brand icon before text
+      chip.innerHTML = `<span class="bw-chip-icon" style="color:${color}">${chip.dataset.icon}</span>` + chip.textContent;
+
+      // Show rich tooltip on mouseenter
+      chip.addEventListener('mouseenter', () => {
+        bwTooltip.innerHTML = `
+          <div class="bw-tooltip-bar" style="background:${color};box-shadow:0 0 8px ${color}88;"></div>
+          <div class="bw-tooltip-head">
+            <div class="bw-tooltip-icon" style="color:${color}">${chip.dataset.icon}</div>
+            <div class="bw-tooltip-name">${chip.dataset.name}</div>
+          </div>
+          <div class="bw-tooltip-desc">${chip.dataset.desc}</div>`;
+
+        const rect = chip.getBoundingClientRect();
+        bwTooltip.style.left = (rect.left + rect.width / 2) + 'px';
+        bwTooltip.style.bottom = (window.innerHeight - rect.top + 12) + 'px';
+        bwTooltip.style.transform = 'translateX(-50%) translateY(8px) scale(0.96)';
+        // Force reflow then animate in
+        requestAnimationFrame(() => bwTooltip.classList.add('visible'));
+      });
+
+      chip.addEventListener('mouseleave', () => {
+        bwTooltip.classList.remove('visible');
+      });
+    });
+
   </script>
 
 </body>
