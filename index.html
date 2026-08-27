@@ -1523,22 +1523,6 @@
       </div>
     </section>
 
-    <!-- Wave Divider -->
-    <div class="wave-divider reveal">
-      <div class="wave-track track-1">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
-      </div>
-      <div class="wave-track track-2">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
-      </div>
-      <div class="wave-track track-3">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
-      </div>
-    </div>
-
     <!-- ============ PROJECTS ============ -->
     <section id="projects" class="reveal">
       <div class="wrap">
@@ -1604,22 +1588,6 @@
     </section>
 
   </main>
-
-    <!-- Wave Divider -->
-    <div class="wave-divider reveal">
-      <div class="wave-track track-1">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
-      </div>
-      <div class="wave-track track-2">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
-      </div>
-      <div class="wave-track track-3">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
-      </div>
-    </div>
 
     <!-- ============ CONTACT / FOOTER ============ -->
   <footer id="contact" class="reveal">
@@ -1851,6 +1819,9 @@
       margin: 40px 0;
       position: relative;
       height: 60px;
+      /* Fades the flat top edge seamlessly into the background */
+      mask-image: linear-gradient(to bottom, transparent 0%, black 60%, black 100%);
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 60%, black 100%);
     }
     .wave-track {
       display: flex;
@@ -1861,17 +1832,17 @@
     }
     .track-1 {
       height: 40px;
-      opacity: 0.4;
+      opacity: 0.15;
       animation: wave-flow 10s linear infinite;
     }
     .track-2 {
       height: 50px;
-      opacity: 0.2;
+      opacity: 0.10;
       animation: wave-flow 14s linear infinite;
     }
     .track-3 {
       height: 60px;
-      opacity: 0.1;
+      opacity: 0.05;
       animation: wave-flow 20s linear infinite reverse;
     }
     .wave-divider svg {
@@ -1880,7 +1851,7 @@
       display: block;
     }
     .wave-divider .shape-fill {
-      fill: var(--line-strong);
+      fill: var(--accent);
     }
     @keyframes wave-flow {
       0%   { transform: translateX(0); }
