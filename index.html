@@ -1518,8 +1518,8 @@
       <div class="navlinks" id="navlinks">
         <a href="#about" onclick="closeNav()">About</a>
         <a href="#stack" onclick="closeNav()">Stack</a>
-        <a href="#projects" onclick="closeNav()">Projects</a>
-        <a href="#notes" onclick="closeNav()">Notes</a>
+        <a href="#projects" onclick="closeNav()">Case Studies</a>
+        <a href="#now" onclick="closeNav()">/now</a>
         <a href="#contact" class="resume-link" onclick="closeNav()">Contact &rarr;</a>
       </div>
 
@@ -1759,6 +1759,21 @@
             <text class="node-text hot" x="765" y="275" text-anchor="middle">Git / GitHub</text>
           </svg>
         </div>
+
+        <div class="stack-context cascade-item" style="margin-top: 48px; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px;">
+          <div>
+            <h4 style="color: var(--ink); margin-bottom: 8px; font-weight: 600;">Backend Architect</h4>
+            <p style="color: var(--ink-dim); font-size: 15px;">I design REST APIs with Java Spring Boot that are secure, well-documented, and handle high traffic gracefully.</p>
+          </div>
+          <div>
+            <h4 style="color: var(--ink); margin-bottom: 8px; font-weight: 600;">Frontend Craftsman</h4>
+            <p style="color: var(--ink-dim); font-size: 15px;">I build responsive, dynamic UIs with React JS and Tailwind CSS, ensuring a smooth user experience.</p>
+          </div>
+          <div>
+            <h4 style="color: var(--ink); margin-bottom: 8px; font-weight: 600;">Database &amp; DevOps</h4>
+            <p style="color: var(--ink-dim); font-size: 15px;">I structure data with MySQL/PostgreSQL and deploy cloud-native solutions via Docker and Vercel.</p>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -1767,7 +1782,7 @@
       <div class="wrap">
         <div class="sec-head cascade-item">
           <div>
-            <h2>Selected projects</h2>
+            <h2>Case Studies</h2>
           </div>
         </div>
 
@@ -1810,29 +1825,29 @@
       </div>
     </div>
 
-    <!-- ============ NOTES ============ -->
-    <section id="notes" class="reveal">
+    <!-- ============ NOW ============ -->
+    <section id="now" class="reveal">
       <div class="wrap">
         <div class="sec-head cascade-item">
           <div>
-            <h2>Notes</h2>
+            <h2>/now</h2>
           </div>
         </div>
         <div class="notes">
           <div class="note cascade-item">
-            <div class="date">AUG 2026</div>
-            <h4>Structuring REST APIs in Spring Boot</h4>
-            <p>My go-to patterns for controllers, DTOs, and global exception handling to keep Java backends clean.</p>
+            <div class="date">CURRENTLY</div>
+            <h4>System Design</h4>
+            <p>Currently diving deeper into System Design and microservices architecture.</p>
           </div>
           <div class="note cascade-item">
-            <div class="date">MAY 2026</div>
-            <h4>React Performance: When to actually memoize</h4>
-            <p>Notes on avoiding unnecessary re-renders and keeping the frontend snappy as the app grows.</p>
+            <div class="date">BUILDING</div>
+            <h4>Open-Source</h4>
+            <p>Building a new open-source tool for automated API documentation.</p>
           </div>
           <div class="note cascade-item">
-            <div class="date">FEB 2026</div>
-            <h4>Modern PHP is actually amazing</h4>
-            <p>Why I still love building with PHP today: strict typing, great frameworks, and rapid development.</p>
+            <div class="date">SEEKING</div>
+            <h4>Full-Stack Role</h4>
+            <p>Looking for a full-stack role where I can tackle complex backend challenges.</p>
           </div>
         </div>
       </div>
@@ -2579,7 +2594,7 @@
         <div class="project">
           <div class="pnum">${num}</div>
           <div>
-            <h3>${repo.name.replace(/-/g, ' ').replace(/_/g, ' ')}</h3>
+            <h3>Case Study: ${repo.name.replace(/-/g, ' ').replace(/_/g, ' ')}</h3>
             <p>${desc}</p>
             <div class="tags">
               ${lang ? `<span class="lang-label"><span class="lang-dot" style="background:${langColor(lang)}"></span>${lang}</span>` : ''}
