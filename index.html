@@ -1722,7 +1722,7 @@
       height: 6px;
       border-radius: 50%;
       pointer-events: none;
-      z-index: 9998;
+      z-index: 10005; /* Keeps particles on top of the share modal */
       background: var(--accent);
       box-shadow: 0 0 6px var(--accent), 0 0 12px var(--accent-glow);
       transform: translate(-50%, -50%);
@@ -2568,17 +2568,7 @@
       const title = 'Nsengiyumva Christophe | Full-Stack Developer';
       const text = 'Check out this amazing portfolio from Nsengiyumva Christophe!';
 
-      // If mobile/native share sheet is supported, use it!
-      if (navigator.share) {
-        try {
-          await navigator.share({ title, text, url });
-          return;
-        } catch (err) {
-          // Fallback if user cancels or it fails
-        }
-      }
-
-      // Otherwise, open our beautiful custom share modal
+      // Always open our beautiful custom share modal
       openCustomShareModal(url, text, title);
     }
 
