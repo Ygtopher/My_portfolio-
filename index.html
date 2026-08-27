@@ -1151,41 +1151,44 @@
       box-shadow: 0 0 10px var(--accent);
     }
 
-    /* Hide ALL default OS cursors — our custom icon replaces everything */
-    * { cursor: none !important; }
+    /* ── Custom Hardware Cursor (Desktop Only) ── */
+    @media (min-width: 861px) and (pointer: fine) {
+      /* Hide ALL default OS cursors — our custom icon replaces everything */
+      * { cursor: none !important; }
 
-    .custom-cursor {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 28px;
-      height: 28px;
-      pointer-events: none;
-      transform: translate(0, 0);
-      z-index: 10010;
-      transition: transform 0.15s ease, filter 0.2s ease, opacity 0.2s;
-      filter: drop-shadow(0 0 4px var(--accent));
-      opacity: 1;
+      .custom-cursor {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 28px;
+        height: 28px;
+        pointer-events: none;
+        transform: translate(0, 0);
+        z-index: 10010;
+        transition: transform 0.15s ease, filter 0.2s ease, opacity 0.2s;
+        filter: drop-shadow(0 0 4px var(--accent));
+        opacity: 1;
+      }
+      .custom-cursor svg path,
+      .custom-cursor svg rect {
+        stroke: var(--accent);
+        fill: var(--bg);
+        transition: fill 0.2s, stroke 0.2s;
+      }
+      .custom-cursor.hovering {
+        filter: drop-shadow(0 0 8px var(--accent)) drop-shadow(0 0 16px var(--accent-glow));
+        opacity: 1;
+      }
+      .custom-cursor.hovering svg path,
+      .custom-cursor.hovering svg rect {
+        fill: var(--bg);
+        stroke: var(--ink);
+      }
     }
-    .custom-cursor svg path,
-    .custom-cursor svg rect {
-      stroke: var(--accent);
-      fill: var(--bg);
-      transition: fill 0.2s, stroke 0.2s;
-    }
-    .custom-cursor.hovering {
-      filter: drop-shadow(0 0 8px var(--accent)) drop-shadow(0 0 16px var(--accent-glow));
-      opacity: 1;
-    }
-    .custom-cursor.hovering svg path,
-    .custom-cursor.hovering svg rect {
-      fill: var(--bg);
-      stroke: var(--ink);
-    }
-    @media (max-width: 860px) {
-      .custom-cursor { display: none; }
-      body { cursor: auto; }
-      a, button, input, textarea, select { cursor: auto; }
+    
+    /* Ensure the custom cursor is physically hidden on touch/mobile */
+    @media (max-width: 860px), (pointer: coarse) {
+      .custom-cursor { display: none !important; }
     }
 
     .stack-grid {
