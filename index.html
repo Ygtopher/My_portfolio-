@@ -5,21 +5,26 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nsengiyumva Christophe — Full-Stack Developer</title>
-  <meta name="description" content="Nsengiyumva Christophe — passionate full-stack developer building modern web applications with Java Spring Boot, PHP, and React JS.">
-  <meta name="keywords" content="Nsengiyumva Christophe, Christophe Nsengiyumva, Full-Stack Developer, Software Engineer Kigali, Java Spring Boot Developer, React Developer Rwanda, Web Developer, Portfolio">
+  <meta name="description"
+    content="Nsengiyumva Christophe — passionate full-stack developer building modern web applications with Java Spring Boot, PHP, and React JS.">
+  <meta name="keywords"
+    content="Nsengiyumva Christophe, Christophe Nsengiyumva, Full-Stack Developer, Software Engineer Kigali, Java Spring Boot Developer, React Developer Rwanda, Web Developer, Portfolio">
   <meta name="author" content="Nsengiyumva Christophe">
   <meta name="robots" content="index, follow">
 
   <!-- Open Graph / Facebook / LinkedIn -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Nsengiyumva Christophe — Full-Stack Developer">
-  <meta property="og:description" content="Passionate full-stack developer building modern web applications with Java Spring Boot, PHP, and React JS.">
-  <meta property="og:url" content="https://christophe.portfolio.com/"> <!-- Update this with your actual Vercel URL later -->
-  
+  <meta property="og:description"
+    content="Passionate full-stack developer building modern web applications with Java Spring Boot, PHP, and React JS.">
+  <meta property="og:url" content="https://nsengiyumva-christophe-portfolio.vercel.app/">
+  <!-- Update this with your actual Vercel URL later -->
+
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:title" content="Nsengiyumva Christophe — Full-Stack Developer">
-  <meta property="twitter:description" content="Passionate full-stack developer building modern web applications with Java Spring Boot, PHP, and React JS.">
+  <meta property="twitter:description"
+    content="Passionate full-stack developer building modern web applications with Java Spring Boot, PHP, and React JS.">
 
   <!-- Google Search Console Verification -->
   <meta name="google-site-verification" content="5i9BHBMaKyK8j3lwTt8cShhLWo3pHga3CNBZ1V4wNUc" />
@@ -37,7 +42,8 @@
       --bg: #030712;
       --bg-alt: #111827;
       --bg-panel: rgba(255, 255, 255, 0.03);
-      --line: rgba(255, 255, 255, 0.15); /* Darker lines for better visibility */
+      --line: rgba(255, 255, 255, 0.15);
+      /* Darker lines for better visibility */
       --line-strong: rgba(255, 255, 255, 0.3);
       --ink: #F9FAFB;
       --ink-dim: #9CA3AF;
@@ -61,17 +67,24 @@
     }
 
     [data-theme="light"] {
-      --bg: #F4F4F5; /* Soft paper gray, not stark white */
+      --bg: #F4F4F5;
+      /* Soft paper gray, not stark white */
       --bg-alt: #E4E4E7;
-      --bg-panel: rgba(255, 255, 255, 0.6); /* Frosted glass effect */
-      --line: rgba(0, 0, 0, 0.15); /* Darker lines for better visibility */
+      --bg-panel: rgba(255, 255, 255, 0.6);
+      /* Frosted glass effect */
+      --line: rgba(0, 0, 0, 0.15);
+      /* Darker lines for better visibility */
       --line-strong: rgba(0, 0, 0, 0.3);
-      --ink: #27272A; /* Softer text, reduces eye strain */
+      --ink: #27272A;
+      /* Softer text, reduces eye strain */
       --ink-dim: #52525B;
       --ink-faint: #A1A1AA;
-      --accent: #2563EB; /* Readable, vibrant blue */
-      --accent-2: #059669; /* Readable green */
-      --accent-glow: rgba(37, 99, 235, 0.08); /* Very soft glow */
+      --accent: #2563EB;
+      /* Readable, vibrant blue */
+      --accent-2: #059669;
+      /* Readable green */
+      --accent-glow: rgba(37, 99, 235, 0.08);
+      /* Very soft glow */
       --bg-glass: rgba(244, 244, 245, 0.88);
       --nav-overlay: rgba(244, 244, 245, 0.97);
       --btn-bg: rgba(0, 0, 0, 0.03);
@@ -130,7 +143,7 @@
       inset: 0;
       z-index: 0;
       pointer-events: none;
-      background: 
+      background:
         radial-gradient(circle at 15% 0%, var(--accent-glow) 0%, transparent 40%),
         radial-gradient(circle at 85% 100%, rgba(255, 209, 102, 0.08) 0%, transparent 40%);
     }
@@ -263,12 +276,14 @@
       border-radius: 999px;
       white-space: nowrap;
     }
+
     .status-badge .ping {
       position: relative;
       width: 8px;
       height: 8px;
       flex-shrink: 0;
     }
+
     .status-badge .ping::before {
       content: '';
       position: absolute;
@@ -277,6 +292,7 @@
       background: #22c55e;
       animation: ping 1.8s ease-out infinite;
     }
+
     .status-badge .ping::after {
       content: '';
       position: absolute;
@@ -284,13 +300,28 @@
       border-radius: 50%;
       background: #22c55e;
     }
+
     @keyframes ping {
-      0%   { transform: scale(1);   opacity: 0.8; }
-      70%  { transform: scale(2.2); opacity: 0; }
-      100% { transform: scale(2.2); opacity: 0; }
+      0% {
+        transform: scale(1);
+        opacity: 0.8;
+      }
+
+      70% {
+        transform: scale(2.2);
+        opacity: 0;
+      }
+
+      100% {
+        transform: scale(2.2);
+        opacity: 0;
+      }
     }
+
     @media (max-width: 600px) {
-      .status-badge { display: none; }
+      .status-badge {
+        display: none;
+      }
     }
 
     .navlinks {
@@ -304,8 +335,10 @@
     .navlinks a {
       position: relative;
       transition: color 0.2s;
-      padding: 12px 16px;       /* wide clickable area */
-      margin: -12px -16px;      /* cancel out layout shift from padding */
+      padding: 12px 16px;
+      /* wide clickable area */
+      margin: -12px -16px;
+      /* cancel out layout shift from padding */
     }
 
     .navlinks a:hover {
@@ -356,9 +389,17 @@
     }
 
     /* Hamburger → X animation */
-    .navtoggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .navtoggle.open span:nth-child(2) { opacity: 0; }
-    .navtoggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .navtoggle.open span:nth-child(1) {
+      transform: translateY(6.5px) rotate(45deg);
+    }
+
+    .navtoggle.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .navtoggle.open span:nth-child(3) {
+      transform: translateY(-6.5px) rotate(-45deg);
+    }
 
     /* Theme Toggle Button */
     .theme-toggle {
@@ -370,12 +411,25 @@
       align-items: center;
       justify-content: center;
       transition: color 0.2s;
-      padding: 12px 16px;   /* wide clickable area */
+      padding: 12px 16px;
+      /* wide clickable area */
     }
-    .theme-toggle:hover { color: var(--accent); }
-    .icon-moon { display: none; }
-    [data-theme="light"] .icon-sun { display: none; }
-    [data-theme="light"] .icon-moon { display: block; }
+
+    .theme-toggle:hover {
+      color: var(--accent);
+    }
+
+    .icon-moon {
+      display: none;
+    }
+
+    [data-theme="light"] .icon-sun {
+      display: none;
+    }
+
+    [data-theme="light"] .icon-moon {
+      display: block;
+    }
 
     /* ============================================================
    HERO — title block styled like a technical drawing stamp
@@ -420,10 +474,12 @@
         grid-template-columns: 1fr;
         gap: 40px;
       }
+
       .hero-avatar {
         width: 280px;
         margin: 0 auto;
-        order: -1; /* photo goes above text */
+        order: -1;
+        /* photo goes above text */
       }
     }
 
@@ -503,7 +559,8 @@
     .btn.ghost:hover {
       border-color: var(--accent-2);
       color: var(--accent-2);
-      background: rgba(141, 169, 196, 0.05); /* Using a generic soft background */
+      background: rgba(141, 169, 196, 0.05);
+      /* Using a generic soft background */
       box-shadow: 0 0 20px var(--accent-2-shadow);
     }
 
@@ -608,6 +665,7 @@
     .personal-info .v.ok {
       color: var(--accent-2);
     }
+
     .about-grid {
       display: grid;
       grid-template-columns: 1.3fr 1fr;
@@ -742,7 +800,8 @@
       align-items: start;
       transition: all 0.3s ease;
       border-radius: var(--radius);
-      margin: 0 -16px; /* offset padding for hover state */
+      margin: 0 -16px;
+      /* offset padding for hover state */
       padding-left: 16px;
       padding-right: 16px;
     }
@@ -816,15 +875,19 @@
     }
 
     /* tags row — align items center for dot */
-    .tags { align-items: center; }
+    .tags {
+      align-items: center;
+    }
 
     /* language color dot */
     .lang-dot {
-      width: 10px; height: 10px;
+      width: 10px;
+      height: 10px;
       border-radius: 50%;
       display: inline-block;
       flex-shrink: 0;
     }
+
     .lang-label {
       font-family: var(--mono);
       font-size: 11px;
@@ -840,6 +903,7 @@
       gap: 14px;
       margin-top: 8px;
     }
+
     .repo-meta span {
       font-family: var(--mono);
       font-size: 11px;
@@ -857,14 +921,23 @@
       flex-direction: column;
       gap: 10px;
     }
-    .proj-skeleton:first-child { border-top: none; }
+
+    .proj-skeleton:first-child {
+      border-top: none;
+    }
+
     .skel {
       background: linear-gradient(90deg, var(--bg-panel) 25%, var(--bg-alt) 50%, var(--bg-panel) 75%);
       background-size: 200% 100%;
       animation: shimmer 1.4s infinite;
       border-radius: 2px;
     }
-    @keyframes shimmer { to { background-position: -200% 0; } }
+
+    @keyframes shimmer {
+      to {
+        background-position: -200% 0;
+      }
+    }
 
     /* github cta */
     .github-cta {
@@ -1001,7 +1074,8 @@
       .navlinks {
         display: none;
         position: fixed;
-        inset: 0;                       /* covers full screen */
+        inset: 0;
+        /* covers full screen */
         background: var(--nav-overlay);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
@@ -1010,22 +1084,41 @@
         justify-content: center;
         gap: 40px;
         font-size: 22px;
-        z-index: 100;                   /* below navtoggle (300) */
+        z-index: 100;
+        /* below navtoggle (300) */
         animation: none;
       }
+
       .navlinks.open {
         display: flex;
         animation: fadeIn 0.25s ease;
       }
-      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-      .navlinks a { font-size: 22px; }
-      .navlinks a::after { display: none; } /* no underline indicator in overlay */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+
+        to {
+          opacity: 1;
+        }
+      }
+
+      .navlinks a {
+        font-size: 22px;
+      }
+
+      .navlinks a::after {
+        display: none;
+      }
+
+      /* no underline indicator in overlay */
 
       .navtoggle {
         display: flex;
         position: relative;
-        z-index: 300;                   /* always above the overlay */
+        z-index: 300;
+        /* always above the overlay */
       }
 
       /* About */
@@ -1033,6 +1126,7 @@
         grid-template-columns: 1fr;
         gap: 40px;
       }
+
       .stat-list {
         flex-direction: row;
         flex-wrap: wrap;
@@ -1041,15 +1135,20 @@
         border-top: 1px solid var(--line-strong);
         padding-top: 24px;
       }
-      .stat { min-width: 80px; }
+
+      .stat {
+        min-width: 80px;
+      }
 
       /* Title block: 2 cols on tablet */
       .titleblock {
         grid-template-columns: repeat(2, 1fr);
       }
+
       .titleblock .cell:nth-child(2n) {
         border-right: none;
       }
+
       .titleblock .cell:nth-child(-n+2) {
         border-bottom: 1px solid var(--line);
       }
@@ -1059,21 +1158,30 @@
         grid-template-columns: 1fr;
         gap: 12px;
       }
+
       .project .plinks {
         align-items: flex-start;
         text-align: left;
         flex-direction: row;
         gap: 20px;
       }
-      .project .pnum { display: none; }
+
+      .project .pnum {
+        display: none;
+      }
 
       /* Notes: 2 cols on tablet */
       .notes {
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .wrap   { padding: 0 20px; }
-      section { padding: 72px 0; }
+      .wrap {
+        padding: 0 20px;
+      }
+
+      section {
+        padding: 72px 0;
+      }
     }
 
     /* ============================================================
@@ -1082,43 +1190,92 @@
     @media (max-width: 480px) {
 
       /* Hero */
-      .hero { padding: 64px 0 56px; }
-      .hero-avatar { width: 200px; }
-      .hero h1 { font-size: clamp(30px, 9vw, 48px); }
-      .hero p.lede { font-size: 15px; margin-top: 20px; }
+      .hero {
+        padding: 64px 0 56px;
+      }
+
+      .hero-avatar {
+        width: 200px;
+      }
+
+      .hero h1 {
+        font-size: clamp(30px, 9vw, 48px);
+      }
+
+      .hero p.lede {
+        font-size: 15px;
+        margin-top: 20px;
+      }
+
       .hero-cta {
         flex-direction: column;
         align-items: stretch;
       }
-      .btn { width: 100%; justify-content: center; box-sizing: border-box; }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+        box-sizing: border-box;
+      }
 
       /* Title block: 1 col on mobile */
       .titleblock {
         grid-template-columns: 1fr;
       }
+
       .titleblock .cell {
         border-right: none;
         border-bottom: 1px solid var(--line);
       }
-      .titleblock .cell:last-child { border-bottom: none; }
+
+      .titleblock .cell:last-child {
+        border-bottom: none;
+      }
 
       /* Notes: single column */
-      .notes { grid-template-columns: 1fr; }
+      .notes {
+        grid-template-columns: 1fr;
+      }
 
       /* Projects */
-      .project h3 { font-size: 18px; }
-      .repo-meta { flex-wrap: wrap; gap: 8px; }
+      .project h3 {
+        font-size: 18px;
+      }
+
+      .repo-meta {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
 
       /* Stack diagram scrollable on tiny screens */
-      .stack-diagram { overflow-x: auto; padding: 16px; }
-      .node-svg { min-width: 480px; }
+      .stack-diagram {
+        overflow-x: auto;
+        padding: 16px;
+      }
+
+      .node-svg {
+        min-width: 480px;
+      }
 
       /* Footer */
-      .legend { flex-direction: column; }
-      .legend a { width: 100%; box-sizing: border-box; }
-      .foot-bottom { flex-direction: column; text-align: center; gap: 6px; }
+      .legend {
+        flex-direction: column;
+      }
 
-      section { padding: 56px 0; }
+      .legend a {
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .foot-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 6px;
+      }
+
+      section {
+        padding: 56px 0;
+      }
     }
 
     /* ============================================================
@@ -1129,15 +1286,17 @@
       opacity: 0;
       transform: translateY(22px);
       transition:
-        opacity  0.55s ease-out,
+        opacity 0.55s ease-out,
         transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
       transition-delay: calc(var(--i, 0) * 120ms);
       will-change: opacity, transform;
     }
+
     .cascade-item.visible {
       opacity: 1;
       transform: translateY(0);
     }
+
     @media (prefers-reduced-motion: reduce) {
       .cascade-item {
         transition: none;
@@ -1149,13 +1308,22 @@
     /* ============================================================
     NEW PREMIUM FEATURES (Scrollbar, Cursor, Tooltips, Form)
     ============================================================ */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+
     ::-webkit-scrollbar-thumb {
       background: var(--line-strong);
       border-radius: 10px;
     }
-    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent);
+    }
 
     #scroll-progress {
       position: fixed;
@@ -1170,8 +1338,11 @@
 
     /* ── Custom Hardware Cursor (Desktop Only) ── */
     @media (min-width: 861px) and (pointer: fine) {
+
       /* Hide ALL default OS cursors — our custom icon replaces everything */
-      * { cursor: none !important; }
+      * {
+        cursor: none !important;
+      }
 
       .custom-cursor {
         position: fixed;
@@ -1186,26 +1357,32 @@
         filter: drop-shadow(0 0 4px var(--accent));
         opacity: 1;
       }
+
       .custom-cursor svg path,
       .custom-cursor svg rect {
         stroke: var(--accent);
         fill: var(--bg);
         transition: fill 0.2s, stroke 0.2s;
       }
+
       .custom-cursor.hovering {
         filter: drop-shadow(0 0 8px var(--accent)) drop-shadow(0 0 16px var(--accent-glow));
         opacity: 1;
       }
+
       .custom-cursor.hovering svg path,
       .custom-cursor.hovering svg rect {
         fill: var(--bg);
         stroke: var(--ink);
       }
     }
-    
+
     /* Ensure the custom cursor is physically hidden on touch/mobile */
-    @media (max-width: 860px), (pointer: coarse) {
-      .custom-cursor { display: none !important; }
+    @media (max-width: 860px),
+    (pointer: coarse) {
+      .custom-cursor {
+        display: none !important;
+      }
     }
 
     .stack-grid {
@@ -1214,6 +1391,7 @@
       gap: 16px;
       margin-top: 32px;
     }
+
     .tech-card {
       position: relative;
       border: 1px solid var(--line);
@@ -1226,12 +1404,14 @@
       cursor: default;
       transition: all 0.3s ease;
     }
+
     .tech-card:hover {
       border-color: var(--accent-2);
       transform: translateY(-2px);
       box-shadow: 0 4px 12px var(--accent-2-shadow);
       color: var(--accent-2);
     }
+
     .tech-card .tooltip {
       position: absolute;
       bottom: 110%;
@@ -1249,6 +1429,7 @@
       border: 1px solid var(--line-strong);
       z-index: 10;
     }
+
     .tech-card:hover .tooltip {
       opacity: 1;
       transform: translateX(-50%) translateY(0);
@@ -1262,6 +1443,7 @@
       margin-top: 40px;
       margin-bottom: 40px;
     }
+
     .contact-form input,
     .contact-form textarea {
       width: 100%;
@@ -1275,10 +1457,12 @@
       outline: none;
       transition: border-color 0.3s, box-shadow 0.3s;
     }
+
     .contact-form textarea {
       resize: vertical;
       min-height: 120px;
     }
+
     .contact-form input:focus,
     .contact-form textarea:focus {
       border-color: var(--accent);
@@ -1312,9 +1496,9 @@
   <div id="custom-cursor" class="custom-cursor">
     <!-- Mouse device SVG icon -->
     <svg viewBox="0 0 24 38" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
-      <rect x="1" y="1" width="22" height="32" rx="11" stroke-width="1.5"/>
-      <line x1="12" y1="1" x2="12" y2="14" stroke-width="1.5" stroke="var(--accent)"/>
-      <rect x="9" y="6" width="6" height="8" rx="3" fill="var(--accent)" stroke="none"/>
+      <rect x="1" y="1" width="22" height="32" rx="11" stroke-width="1.5" />
+      <line x1="12" y1="1" x2="12" y2="14" stroke-width="1.5" stroke="var(--accent)" />
+      <rect x="9" y="6" width="6" height="8" rx="3" fill="var(--accent)" stroke="none" />
     </svg>
   </div>
 
@@ -1331,19 +1515,29 @@
 
       <!-- Desktop links (hidden on mobile via media query) -->
       <div class="navlinks" id="navlinks">
-        <a href="#about"    onclick="closeNav()">About</a>
-        <a href="#stack"    onclick="closeNav()">Stack</a>
+        <a href="#about" onclick="closeNav()">About</a>
+        <a href="#stack" onclick="closeNav()">Stack</a>
         <a href="#projects" onclick="closeNav()">Projects</a>
-        <a href="#notes"    onclick="closeNav()">Notes</a>
-        <a href="#contact"  class="resume-link" onclick="closeNav()">Contact &rarr;</a>
+        <a href="#notes" onclick="closeNav()">Notes</a>
+        <a href="#contact" class="resume-link" onclick="closeNav()">Contact &rarr;</a>
       </div>
 
       <div style="display: flex; align-items: center; gap: 20px;">
         <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+            fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
           </svg>
-          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+            fill="none" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         </button>
@@ -1411,16 +1605,28 @@
     <!-- Wave Divider -->
     <div class="wave-divider reveal">
       <div class="wave-track track-1">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path>
+        </svg>
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path>
+        </svg>
       </div>
       <div class="wave-track track-2">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path>
+        </svg>
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path>
+        </svg>
       </div>
       <div class="wave-track track-3">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path>
+        </svg>
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path>
+        </svg>
       </div>
     </div>
 
@@ -1481,16 +1687,28 @@
     <!-- Wave Divider -->
     <div class="wave-divider reveal" style="transform: rotate(180deg);">
       <div class="wave-track track-1">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path>
+        </svg>
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path>
+        </svg>
       </div>
       <div class="wave-track track-2">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path>
+        </svg>
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path>
+        </svg>
       </div>
       <div class="wave-track track-3">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path>
+        </svg>
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path>
+        </svg>
       </div>
     </div>
 
@@ -1566,16 +1784,28 @@
     <!-- Wave Divider -->
     <div class="wave-divider reveal" style="transform: rotate(180deg);">
       <div class="wave-track track-1">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path>
+        </svg>
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path>
+        </svg>
       </div>
       <div class="wave-track track-2">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path>
+        </svg>
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path>
+        </svg>
       </div>
       <div class="wave-track track-3">
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
-        <svg viewBox="0 0 1200 120" preserveAspectRatio="none"><path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path></svg>
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path>
+        </svg>
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+          <path class="shape-fill" d="M0,60 C300,120 300,0 600,60 C900,120 900,0 1200,60 V0 H0 V60 Z"></path>
+        </svg>
       </div>
     </div>
 
@@ -1609,7 +1839,7 @@
 
   </main>
 
-    <!-- ============ CONTACT / FOOTER ============ -->
+  <!-- ============ CONTACT / FOOTER ============ -->
   <footer id="contact" class="reveal">
     <div class="wrap">
       <div class="contact-head cascade-item">
@@ -1624,27 +1854,45 @@
         <input type="text" name="name" placeholder="Your Name" required>
         <input type="email" name="email" placeholder="Your Email" required>
         <textarea name="message" placeholder="Your Message..." required></textarea>
-        <button type="submit" id="form-submit-btn" class="btn primary" style="width: 100%; justify-content: center;">Send Message &rarr;</button>
-        <div id="form-status" style="display:none; padding: 12px 16px; border-radius: var(--radius); font-family: var(--mono); font-size: 13px; text-align: center;"></div>
+        <button type="submit" id="form-submit-btn" class="btn primary"
+          style="width: 100%; justify-content: center;">Send Message &rarr;</button>
+        <div id="form-status"
+          style="display:none; padding: 12px 16px; border-radius: var(--radius); font-family: var(--mono); font-size: 13px; text-align: center;">
+        </div>
       </form>
 
       <div class="legend cascade-item">
         <a href="mailto:nsechris0@gmail.com">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+            <polyline points="22,6 12,13 2,6"></polyline>
+          </svg>
           nsechris0@gmail.com
         </a>
         <a href="https://www.linkedin.com/in/nsengiyumva-christophe-b72261293/" target="_blank" rel="noopener">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+            <rect x="2" y="9" width="4" height="12"></rect>
+            <circle cx="4" cy="4" r="2"></circle>
+          </svg>
           Nsengiyumva Christophe
         </a>
         <a href="https://www.instagram.com/ygtopher/" target="_blank" rel="noopener">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
           ygtopher
         </a>
       </div>
       <div class="foot-bottom">
         <span style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
-          <span style="color:var(--ink-dim);font-family:var(--mono);font-size:12px;">© <span id="copyright-year"></span> Nsengiyumva Christophe — Built with</span>
+          <span style="color:var(--ink-dim);font-family:var(--mono);font-size:12px;">© <span id="copyright-year"></span>
+            Nsengiyumva Christophe — Built with</span>
           <span class="bw-chip" data-color="#e34c26"
             data-icon='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z"/></svg>'
             data-name="HTML5" data-desc="Semantic structure. No framework needed.">HTML</span>
@@ -1677,7 +1925,12 @@
       position: relative;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .bw-chip svg { width: 12px; height: 12px; }
+
+    .bw-chip svg {
+      width: 12px;
+      height: 12px;
+    }
+
     .bw-chip:hover {
       transform: translateY(-2px);
     }
@@ -1693,27 +1946,31 @@
       border-radius: 12px;
       padding: 14px 16px;
       min-width: 200px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.04);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), 0 0 0 1px rgba(255, 255, 255, 0.04);
       pointer-events: none;
       opacity: 0;
       transform: translateY(8px) scale(0.96);
       transition: opacity 0.2s ease, transform 0.2s ease;
     }
+
     .bw-tooltip.visible {
       opacity: 1;
       transform: translateY(0) scale(1);
     }
+
     .bw-tooltip-bar {
       height: 3px;
       border-radius: 2px;
       margin-bottom: 12px;
     }
+
     .bw-tooltip-head {
       display: flex;
       align-items: center;
       gap: 8px;
       margin-bottom: 6px;
     }
+
     .bw-tooltip-icon {
       width: 22px;
       height: 22px;
@@ -1721,13 +1978,19 @@
       align-items: center;
       justify-content: center;
     }
-    .bw-tooltip-icon svg { width: 18px; height: 18px; }
+
+    .bw-tooltip-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
     .bw-tooltip-name {
       font-family: var(--mono);
       font-size: 13px;
       font-weight: 700;
       color: var(--ink);
     }
+
     .bw-tooltip-desc {
       font-family: var(--mono);
       font-size: 11px;
@@ -1742,15 +2005,24 @@
       height: 6px;
       border-radius: 50%;
       pointer-events: none;
-      z-index: 10005; /* Keeps particles on top of the share modal */
+      z-index: 10005;
+      /* Keeps particles on top of the share modal */
       background: var(--accent);
       box-shadow: 0 0 6px var(--accent), 0 0 12px var(--accent-glow);
       transform: translate(-50%, -50%);
       animation: particle-fade 0.6s ease-out forwards;
     }
+
     @keyframes particle-fade {
-      0%   { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
-      100% { opacity: 0;   transform: translate(-50%, -50%) scale(0); }
+      0% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+      }
     }
 
     /* ── Floating Action Buttons (WhatsApp & Share) ── */
@@ -1763,6 +2035,7 @@
       gap: 12px;
       z-index: 9990;
     }
+
     .fab-btn {
       width: 50px;
       height: 50px;
@@ -1775,23 +2048,30 @@
       background: var(--bg-glass);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
-      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
       cursor: pointer;
       transition: transform 0.2s, border-color 0.2s, color 0.2s;
       text-decoration: none;
     }
-    .fab-btn svg { width: 22px; height: 22px; }
+
+    .fab-btn svg {
+      width: 22px;
+      height: 22px;
+    }
+
     .fab-btn:hover {
       transform: translateY(-4px) scale(1.05);
       border-color: var(--accent);
       color: var(--accent);
     }
+
     .fab-btn.wa-btn {
       background: #25D366;
       color: #fff;
       border: none;
       box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
     }
+
     .fab-btn.wa-btn:hover {
       color: #fff;
       background: #22c35e;
@@ -1801,8 +2081,11 @@
     /* ── Share Modal ── */
     .modal-overlay {
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.4);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       z-index: 10000;
@@ -1813,10 +2096,12 @@
       pointer-events: none;
       transition: opacity 0.3s;
     }
+
     .modal-overlay.open {
       opacity: 1;
       pointer-events: auto;
     }
+
     .share-modal-content {
       background: var(--bg);
       border: 1px solid var(--line-strong);
@@ -1825,31 +2110,46 @@
       width: 90%;
       max-width: 360px;
       transform: translateY(20px) scale(0.95);
-      transition: transform 0.3s cubic-bezier(0.23,1,0.32,1);
-      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     }
+
     .modal-overlay.open .share-modal-content {
       transform: translateY(0) scale(1);
     }
+
     .share-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 20px;
     }
-    .share-header h3 { margin: 0; font-size: 18px; color: var(--ink); }
-    .close-btn {
-      background: transparent; border: none;
-      color: var(--ink); font-size: 24px;
-      cursor: pointer; opacity: 0.5;
+
+    .share-header h3 {
+      margin: 0;
+      font-size: 18px;
+      color: var(--ink);
     }
-    .close-btn:hover { opacity: 1; }
-    
+
+    .close-btn {
+      background: transparent;
+      border: none;
+      color: var(--ink);
+      font-size: 24px;
+      cursor: pointer;
+      opacity: 0.5;
+    }
+
+    .close-btn:hover {
+      opacity: 1;
+    }
+
     .share-options {
       display: grid;
       grid-template-columns: 1fr;
       gap: 10px;
     }
+
     .share-opt {
       display: flex;
       align-items: center;
@@ -1866,16 +2166,36 @@
       font-family: var(--sans);
       font-size: 14px;
     }
-    .share-opt svg { width: 18px; height: 18px; }
+
+    .share-opt svg {
+      width: 18px;
+      height: 18px;
+    }
+
     .share-opt:hover {
       background: var(--bg-alt);
       border-color: var(--accent);
     }
-    .share-opt.li svg { color: #0a66c2; }
-    .share-opt.tw svg { color: #1da1f2; }
-    .share-opt.wa svg { color: #25d366; }
-    .share-opt.em svg { color: #ea4335; }
-    .share-opt.cp svg { color: var(--ink); }
+
+    .share-opt.li svg {
+      color: #0a66c2;
+    }
+
+    .share-opt.tw svg {
+      color: #1da1f2;
+    }
+
+    .share-opt.wa svg {
+      color: #25d366;
+    }
+
+    .share-opt.em svg {
+      color: #ea4335;
+    }
+
+    .share-opt.cp svg {
+      color: var(--ink);
+    }
 
     /* ── Toast Notification ── */
     .toast {
@@ -1891,10 +2211,11 @@
       font-size: 13px;
       font-weight: 600;
       opacity: 0;
-      transition: transform 0.4s cubic-bezier(0.23,1,0.32,1), opacity 0.4s;
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.4s;
       z-index: 9999;
       pointer-events: none;
     }
+
     .toast.show {
       transform: translateX(-50%) translateY(0);
       opacity: 1;
@@ -1905,6 +2226,7 @@
       animation: none;
       z-index: 1;
     }
+
     ::view-transition-new(root) {
       animation: none;
       z-index: 2;
@@ -1922,6 +2244,7 @@
       mask-image: linear-gradient(to bottom, transparent 0%, black 60%, black 100%);
       -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 60%, black 100%);
     }
+
     .wave-track {
       display: flex;
       width: 200%;
@@ -1929,32 +2252,43 @@
       top: 0;
       left: 0;
     }
+
     .track-1 {
       height: 40px;
       opacity: 0.15;
       animation: wave-flow 10s linear infinite;
     }
+
     .track-2 {
       height: 50px;
       opacity: 0.10;
       animation: wave-flow 14s linear infinite;
     }
+
     .track-3 {
       height: 60px;
       opacity: 0.05;
       animation: wave-flow 20s linear infinite reverse;
     }
+
     .wave-divider svg {
       width: 50%;
       height: 100%;
       display: block;
     }
+
     .wave-divider .shape-fill {
       fill: var(--accent);
     }
+
     @keyframes wave-flow {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
     }
 
     /* ── Cinematic Intro Overlay ── */
@@ -1971,8 +2305,14 @@
       pointer-events: none;
       transition: opacity 0.6s ease;
     }
-    #cin-overlay.hidden { opacity: 0; }
-    #cin-overlay.gone   { display: none; }
+
+    #cin-overlay.hidden {
+      opacity: 0;
+    }
+
+    #cin-overlay.gone {
+      display: none;
+    }
 
     #cin-stamp {
       display: flex;
@@ -1987,10 +2327,12 @@
       transform: scale(0.85);
       transition: opacity 0.5s ease, transform 0.5s ease;
     }
+
     #cin-stamp.show {
       opacity: 1;
       transform: scale(1);
     }
+
     #cin-stamp-dot {
       width: 12px;
       height: 12px;
@@ -1999,16 +2341,26 @@
       box-shadow: 0 0 16px var(--accent);
       animation: pulse-dot 1.5s ease-in-out infinite;
     }
+
     @keyframes pulse-dot {
-      0%, 100% { box-shadow: 0 0 8px var(--accent); }
-      50%       { box-shadow: 0 0 24px var(--accent); }
+
+      0%,
+      100% {
+        box-shadow: 0 0 8px var(--accent);
+      }
+
+      50% {
+        box-shadow: 0 0 24px var(--accent);
+      }
     }
+
     #cin-lines {
       display: flex;
       flex-direction: column;
       gap: 6px;
       width: 200px;
     }
+
     .cin-line {
       height: 1px;
       background: var(--line-strong);
@@ -2016,7 +2368,10 @@
       transform-origin: left;
       transition: transform 0.4s ease;
     }
-    .cin-line.grow { transform: scaleX(1); }
+
+    .cin-line.grow {
+      transform: scaleX(1);
+    }
 
     /* ── Location Badge ── */
     .location-badge {
@@ -2032,19 +2387,24 @@
       border-radius: 999px;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
+
     .location-badge:hover {
       border-color: var(--accent);
       box-shadow: 0 0 10px var(--accent-shadow);
     }
-    .flag-rw { font-size: 15px; line-height: 1; }
+
+    .flag-rw {
+      font-size: 15px;
+      line-height: 1;
+    }
   </style>
 
   <script>
 
     // ── Cinematic Page Load ──────────────────────────────────────────────
     const cinOverlay = document.getElementById('cin-overlay');
-    const cinStamp   = document.getElementById('cin-stamp');
-    const cinLines   = document.querySelectorAll('.cin-line');
+    const cinStamp = document.getElementById('cin-stamp');
+    const cinLines = document.querySelectorAll('.cin-line');
 
     // Step 1: Show stamp
     setTimeout(() => cinStamp.classList.add('show'), 150);
@@ -2052,7 +2412,7 @@
     setTimeout(() => cinLines.forEach(l => l.classList.add('grow')), 500);
     // Step 3: Fade out & remove overlay
     setTimeout(() => cinOverlay.classList.add('hidden'), 1200);
-    setTimeout(() => cinOverlay.classList.add('gone'),   1850);
+    setTimeout(() => cinOverlay.classList.add('gone'), 1850);
 
     // ── Custom Cursor Logic ──────────────────────────────────────────────
     const cursor = document.getElementById('custom-cursor');
@@ -2061,7 +2421,7 @@
       document.addEventListener('mousemove', (e) => {
         requestAnimationFrame(() => {
           cursor.style.left = e.clientX + 'px';
-          cursor.style.top  = e.clientY + 'px';
+          cursor.style.top = e.clientY + 'px';
         });
       });
 
@@ -2094,11 +2454,11 @@
           const centerY = rect.height / 2;
           const tiltX = ((y - centerY) / centerY) * -6; // Max 6 deg rotation
           const tiltY = ((x - centerX) / centerX) * 6;
-          
+
           el.style.transition = 'transform 0.1s ease-out, box-shadow 0.3s ease, background 0.3s ease';
           el.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
         });
-        
+
         el.addEventListener('mouseleave', () => {
           el.style.transition = 'all 0.5s ease';
           el.style.transform = ''; // clears inline style, returns to CSS default
@@ -2119,8 +2479,8 @@
 
     // ── Contact Form AJAX ────────────────────────────────────────────────
     const contactForm = document.getElementById('contact-form');
-    const formStatus  = document.getElementById('form-status');
-    const submitBtn   = document.getElementById('form-submit-btn');
+    const formStatus = document.getElementById('form-status');
+    const submitBtn = document.getElementById('form-submit-btn');
 
     if (contactForm) {
       contactForm.addEventListener('submit', async (e) => {
@@ -2142,23 +2502,23 @@
           const json = await res.json();
 
           if (json.success) {
-            formStatus.style.display  = 'block';
+            formStatus.style.display = 'block';
             formStatus.style.background = 'rgba(5, 150, 105, 0.12)';
-            formStatus.style.border   = '1px solid rgba(5, 150, 105, 0.3)';
-            formStatus.style.color    = '#059669';
-            formStatus.textContent    = '✓ Message sent! I will get back to you soon.';
+            formStatus.style.border = '1px solid rgba(5, 150, 105, 0.3)';
+            formStatus.style.color = '#059669';
+            formStatus.textContent = '✓ Message sent! I will get back to you soon.';
             contactForm.reset(); // clear all fields
           } else {
             throw new Error('Submission failed');
           }
         } catch {
-          formStatus.style.display  = 'block';
+          formStatus.style.display = 'block';
           formStatus.style.background = 'rgba(220, 38, 38, 0.1)';
-          formStatus.style.border   = '1px solid rgba(220, 38, 38, 0.3)';
-          formStatus.style.color    = '#dc2626';
-          formStatus.textContent    = '✗ Something went wrong. Please email me directly.';
+          formStatus.style.border = '1px solid rgba(220, 38, 38, 0.3)';
+          formStatus.style.color = '#dc2626';
+          formStatus.textContent = '✗ Something went wrong. Please email me directly.';
         } finally {
-          submitBtn.disabled    = false;
+          submitBtn.disabled = false;
           submitBtn.textContent = 'Send Message →';
           // Hide status after 5 seconds
           setTimeout(() => { formStatus.style.display = 'none'; }, 5000);
@@ -2168,7 +2528,7 @@
 
     // ── GitHub Projects Loader ─────────────────────────────────────────────
     const GITHUB_USER = 'Ygtopher';
-    const MAX_REPOS   = 8; // max cards to show
+    const MAX_REPOS = 8; // max cards to show
 
     // Map of language names → brand colors
     const LANG_COLORS = {
@@ -2200,11 +2560,11 @@
         return;
       }
       container.innerHTML = repos.map((repo, i) => {
-        const num    = String(i + 1).padStart(2, '0');
-        const desc   = repo.description || 'No description provided.';
-        const lang   = repo.language || '';
-        const stars  = repo.stargazers_count;
-        const forks  = repo.forks_count;
+        const num = String(i + 1).padStart(2, '0');
+        const desc = repo.description || 'No description provided.';
+        const lang = repo.language || '';
+        const stars = repo.stargazers_count;
+        const forks = repo.forks_count;
         const updated = new Date(repo.pushed_at).toLocaleDateString('en-GB', { month: 'short', year: 'numeric' }).toUpperCase();
 
         return `
@@ -2215,7 +2575,7 @@
             <p>${desc}</p>
             <div class="tags">
               ${lang ? `<span class="lang-label"><span class="lang-dot" style="background:${langColor(lang)}"></span>${lang}</span>` : ''}
-              ${repo.topics && repo.topics.length ? repo.topics.slice(0,3).map(t => `<span class="tag">${t}</span>`).join('') : ''}
+              ${repo.topics && repo.topics.length ? repo.topics.slice(0, 3).map(t => `<span class="tag">${t}</span>`).join('') : ''}
             </div>
             <div class="repo-meta">
               <span>&#9733; ${stars}</span>
@@ -2236,11 +2596,11 @@
       if (!container) return;
       renderSkeletons(container, 4);
       try {
-        const res  = await fetch(
+        const res = await fetch(
           `https://api.github.com/users/${GITHUB_USER}/repos?sort=pushed&per_page=100&type=owner`
         );
         if (!res.ok) throw new Error(`GitHub API: ${res.status}`);
-        const all  = await res.json();
+        const all = await res.json();
         const repos = all
           .filter(r => !r.fork && !r.archived)
           .slice(0, MAX_REPOS);
@@ -2259,7 +2619,7 @@
     const START_YEAR = 2024; // year Christophe started full-stack development
 
     function updateTimestamps() {
-      const now  = new Date();
+      const now = new Date();
       const year = now.getFullYear();
 
       // Footer copyright year
@@ -2288,7 +2648,7 @@
 
     // ── Live Kigali Time (CAT) clock ──────────────────────────────────
     const clockEl = document.getElementById('clock');
-    
+
     // Create a formatter specifically for Kigali time
     const timeFormatter = new Intl.DateTimeFormat('en-GB', {
       timeZone: 'Africa/Kigali',
@@ -2373,7 +2733,7 @@
     }
     // ── Mobile Navigation Toggle ─────────────────────────────────────────
     function toggleNav() {
-      const links  = document.getElementById('navlinks');
+      const links = document.getElementById('navlinks');
       const toggle = document.getElementById('navtoggle');
       links.classList.toggle('open');
       toggle.classList.toggle('open');
@@ -2389,11 +2749,11 @@
     // ── Theme Toggle Logic ───────────────────────────────────────────────
     const themeToggleBtn = document.getElementById('theme-toggle');
     const prefersLight = window.matchMedia('(prefers-color-scheme: light)');
-    
+
     // Check local storage first, fallback to system preference
     const savedTheme = localStorage.getItem('theme');
     const defaultTheme = savedTheme ? savedTheme : (prefersLight.matches ? 'light' : 'dark');
-    
+
     if (defaultTheme === 'light') {
       document.documentElement.setAttribute('data-theme', 'light');
     }
@@ -2401,7 +2761,7 @@
     themeToggleBtn.addEventListener('click', (e) => {
       const isLight = document.documentElement.getAttribute('data-theme') === 'light';
       const targetTheme = isLight ? 'dark' : 'light';
-      
+
       // Fallback for browsers that don't support View Transitions API
       if (!document.startViewTransition) {
         if (targetTheme === 'light') document.documentElement.setAttribute('data-theme', 'light');
@@ -2457,15 +2817,15 @@
       btn.addEventListener('mousemove', (e) => {
         const rect = btn.getBoundingClientRect();
         const cx = rect.left + rect.width / 2;
-        const cy = rect.top  + rect.height / 2;
+        const cy = rect.top + rect.height / 2;
         const dx = (e.clientX - cx) * strength;
         const dy = (e.clientY - cy) * strength;
         btn.style.transition = 'transform 0.15s ease-out';
-        btn.style.transform  = `translate(${dx}px, ${dy}px)`;
+        btn.style.transform = `translate(${dx}px, ${dy}px)`;
       });
       btn.addEventListener('mouseleave', () => {
         btn.style.transition = 'transform 0.5s cubic-bezier(0.23,1,0.32,1)';
-        btn.style.transform  = 'translate(0, 0)';
+        btn.style.transform = 'translate(0, 0)';
       });
     });
 
@@ -2484,10 +2844,10 @@
         // Slightly randomize position around cursor for a sparkle effect
         const offset = () => (Math.random() - 0.5) * 10;
         p.style.left = (e.clientX + offset()) + 'px';
-        p.style.top  = (e.clientY + offset()) + 'px';
+        p.style.top = (e.clientY + offset()) + 'px';
         // Randomize size a bit
         const size = 3 + Math.random() * 5;
-        p.style.width  = size + 'px';
+        p.style.width = size + 'px';
         p.style.height = size + 'px';
         document.body.appendChild(p);
 
@@ -2541,10 +2901,22 @@
   <!-- FAB & Toast Elements -->
   <div class="fab-container">
     <button class="fab-btn share-btn" aria-label="Share Portfolio" onclick="sharePortfolio()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+        stroke-linejoin="round">
+        <circle cx="18" cy="5" r="3"></circle>
+        <circle cx="6" cy="12" r="3"></circle>
+        <circle cx="18" cy="19" r="3"></circle>
+        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+      </svg>
     </button>
     <a href="https://wa.me/250791302106" target="_blank" rel="noopener" class="fab-btn wa-btn" aria-label="WhatsApp">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+        stroke-linejoin="round">
+        <path
+          d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+        </path>
+      </svg>
     </a>
   </div>
 
@@ -2557,23 +2929,38 @@
       </div>
       <div class="share-options">
         <a href="#" target="_blank" rel="noopener" id="share-linkedin" class="share-opt li">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg> 
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+          </svg>
           LinkedIn
         </a>
         <a href="#" target="_blank" rel="noopener" id="share-twitter" class="share-opt tw">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> 
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
           X (Twitter)
         </a>
         <a href="#" target="_blank" rel="noopener" id="share-whatsapp" class="share-opt wa">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.347-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.876 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg> 
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.347-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.876 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.226 1.36.194 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+          </svg>
           WhatsApp
         </a>
         <a href="#" target="_blank" rel="noopener" id="share-email" class="share-opt em">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 12.713l-11.985-9.713h23.97l-11.985 9.713zm0 2.574l-12-9.725v15.438h24v-15.438l-12 9.725z"/></svg> 
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 12.713l-11.985-9.713h23.97l-11.985 9.713zm0 2.574l-12-9.725v15.438h24v-15.438l-12 9.725z" />
+          </svg>
           Email
         </a>
         <button onclick="copyLink()" class="share-opt cp">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
           Copy Link
         </button>
       </div>
@@ -2595,12 +2982,12 @@
     function openCustomShareModal(url, text, title) {
       const encodedUrl = encodeURIComponent(url);
       const encodedText = encodeURIComponent(text);
-      
+
       document.getElementById('share-linkedin').href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
       document.getElementById('share-twitter').href = `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedText}`;
       document.getElementById('share-whatsapp').href = `https://api.whatsapp.com/send?text=${encodedText}%20${encodedUrl}`;
       document.getElementById('share-email').href = `mailto:?subject=${encodeURIComponent(title)}&body=${encodedText}%20${encodedUrl}`;
-      
+
       document.getElementById('share-modal').classList.add('open');
     }
 
