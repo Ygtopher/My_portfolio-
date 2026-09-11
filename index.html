@@ -2158,9 +2158,28 @@
 
     .fab-btn.wa-btn {
       background: #25D366;
-      color: #fff;
-      border: none;
+      color: white;
+      border-color: #25D366;
       box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
+    }
+
+    #back-to-top-btn {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px) scale(0.95);
+      transition: opacity 0.3s, transform 0.3s, border-color 0.2s, color 0.2s;
+    }
+
+    #back-to-top-btn.visible {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+
+    #back-to-top-btn.visible:hover {
+      transform: translateY(-4px) scale(1.05);
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
     .fab-btn.wa-btn:hover {
@@ -2830,6 +2849,31 @@
       mutObs.observe(projContainer, { childList: true });
     }
     // ── Mobile Navigation Toggle ─────────────────────────────────────────
+    // ── Back to Top Button ───────────────────────────────────────────────
+    window.addEventListener('scroll', () => {
+      const backToTopBtn = document.getElementById('back-to-top-btn');
+      if (!backToTopBtn) return;
+      
+      if (window.scrollY > 50) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    });
+
+    function scrollToTop() {
+      // Use the same sleek teleport warp!
+      document.documentElement.classList.add('teleporting');
+      
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'auto' });
+      }, 150);
+
+      setTimeout(() => {
+        document.documentElement.classList.remove('teleporting');
+      }, 450);
+    }
+
     function toggleNav() {
       const links = document.getElementById('navlinks');
       const toggle = document.getElementById('navtoggle');
@@ -3033,6 +3077,12 @@
 
   <!-- FAB & Toast Elements -->
   <div class="fab-container">
+    <button id="back-to-top-btn" class="fab-btn top-btn" aria-label="Back to Top" onclick="scrollToTop()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 15 12 9 6 15"></polyline>
+      </svg>
+    </button>
+    
     <button class="fab-btn share-btn" aria-label="Share Portfolio" onclick="sharePortfolio()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
         stroke-linejoin="round">
