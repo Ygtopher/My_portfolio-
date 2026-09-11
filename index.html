@@ -3061,10 +3061,14 @@
       let holdPower = 0; // 0–1, ramps up over 2s while holding
 
       window.addEventListener('mousemove', (e) => {
-        // If text is selected, disable particle interaction with mouse
+        // If text is selected, cancel black hole and disable interaction
         if (window.getSelection().toString().trim().length > 0) {
           mouse.x = null;
           mouse.y = null;
+          if (isHolding) {
+            isHolding = false;
+            holdPower = 0;
+          }
           return;
         }
         mouse.x = e.clientX;
@@ -3078,20 +3082,20 @@
 
       // ── Black Hole: hold to charge, release to explode ──
       window.addEventListener('mousedown', (e) => {
-        // Don't trigger black hole if clicking directly on text or UI elements
-        const textTags = ['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'SPAN', 'STRONG', 'EM', 'LI', 'A', 'BUTTON', 'INPUT', 'TEXTAREA'];
-        if (textTags.includes(e.target.tagName)) return;
+        // Only trigger on left click (button 0), and skip if it's a double-click (detail >= 2)
+        // This allows double-click-and-drag to select text natively!
+        if (e.button !== 0 || e.detail >= 2) return;
 
         isHolding = true;
         holdStartTime = performance.now();
         holdPower = 0;
         
-        // Prevent accidental text selection while charging black hole
+        // Disable text selection completely while holding the black hole
         document.body.style.userSelect = 'none';
       });
 
       window.addEventListener('mouseup', (e) => {
-        document.body.style.userSelect = ''; // Restore text selection
+        document.body.style.userSelect = ''; // Restore text selection when released
         
         if (!isHolding) return;
         isHolding = false;
