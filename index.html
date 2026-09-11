@@ -3319,6 +3319,7 @@
         // Fire shockwave
         const style = getComputedStyle(document.body);
         const inkHex = style.getPropertyValue('--ink').trim() || '#111827';
+        const accentHex = style.getPropertyValue('--accent').trim() || '#FFD166';
 
         shockwaves.push({
           x: e.clientX,
@@ -3327,7 +3328,7 @@
           alpha: 1.0,
           speed: 10 + holdPower * 8,
           isBurst: true,
-          color: isRepelling ? inkHex : '#FFD166' // Theme ink if repel, Gold if normal
+          color: isRepelling ? inkHex : accentHex
         });
 
         // Fling particles
@@ -3359,6 +3360,10 @@
       window.addEventListener('click', (e) => {
         // Only fire shockwave if not coming from a hold release
         if (holdPower < 0.05) {
+          const style = getComputedStyle(document.body);
+          const inkHex = style.getPropertyValue('--ink').trim() || '#111827';
+          const accentHex = style.getPropertyValue('--accent').trim() || '#FFD166';
+
           shockwaves.push({
             x: e.clientX,
             y: e.clientY,
@@ -3366,7 +3371,7 @@
             alpha: 1.0,
             speed: 7,
             isBurst: false,
-            color: '#FFD166'
+            color: accentHex
           });
         }
       });
@@ -3600,6 +3605,8 @@
 
         const inkRGB = hexToRgb(colors.ink);
         const dimRGB = hexToRgb(colors.dim);
+        const accentRGB = hexToRgb(colors.accent);
+        const dotRGB = hexToRgb(colors.dot);
 
         for (let r = 0; r < rings; r++) {
           let ringR = baseRadius * (1 + r * 0.75);
@@ -3614,8 +3621,8 @@
               : `rgba(${dimRGB}, ${ringOpacity * 0.8})`; // Theme dim color
           } else {
             ctx.strokeStyle = r === 0
-              ? `rgba(255, 209, 102, ${ringOpacity})`
-              : `rgba(91, 192, 190, ${ringOpacity * 0.8})`;
+              ? `rgba(${accentRGB}, ${ringOpacity})`
+              : `rgba(${dotRGB}, ${ringOpacity * 0.8})`;
           }
           ctx.lineWidth = r === 0 ? 2 : 1;
           ctx.globalAlpha = 1.0;
@@ -3629,9 +3636,9 @@
           grad.addColorStop(0.3, `rgba(${dimRGB}, ${holdPower * 0.25})`);
           grad.addColorStop(1, `rgba(${dimRGB}, 0)`);
         } else {
-          grad.addColorStop(0, `rgba(255, 209, 102, ${holdPower * 0.5})`);
-          grad.addColorStop(0.3, `rgba(91, 192, 190, ${holdPower * 0.25})`);
-          grad.addColorStop(1, 'rgba(91, 192, 190, 0)');
+          grad.addColorStop(0, `rgba(${accentRGB}, ${holdPower * 0.5})`);
+          grad.addColorStop(0.3, `rgba(${dotRGB}, ${holdPower * 0.25})`);
+          grad.addColorStop(1, `rgba(${dotRGB}, 0)`);
         }
 
         ctx.fillStyle = grad;
