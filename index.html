@@ -3141,17 +3141,24 @@
           color: isRepelling ? '#EF4444' : '#FFD166' // Red if repel, Gold if normal
         });
 
-        // Fling all particles within burst radius outward
+        // Fling particles
         for (let p of particles) {
           let dx = p.x - e.clientX;
           let dy = p.y - e.clientY;
           let dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < burstRadius && dist > 1) {
-            let force = (1 - dist / burstRadius) * burstStrength;
-            // If it was a repel, the burst is even stronger
-            if (isRepelling) force *= 1.5; 
-            p.vx += (dx / dist) * force;
-            p.vy += (dy / dist) * force;
+          
+          if (isRepelling) {
+            // ── REPULSOR RELEASE: Total Chaos! ──
+            // Makes every single particle fly violently in a random direction
+            p.vx += (Math.random() - 0.5) * burstStrength * 3;
+            p.vy += (Math.random() - 0.5) * burstStrength * 3;
+          } else {
+            // ── BLACK HOLE RELEASE: Radial burst ──
+            if (dist < burstRadius && dist > 1) {
+              let force = (1 - dist / burstRadius) * burstStrength;
+              p.vx += (dx / dist) * force;
+              p.vy += (dy / dist) * force;
+            }
           }
         }
 
