@@ -2534,9 +2534,13 @@
     // ── Custom Cursor Logic ──────────────────────────────────────────────
     const cursor = document.getElementById('custom-cursor');
     if (cursor && !window.matchMedia('(max-width: 860px)').matches) {
+      // Start hidden so it doesn't get stuck at top-left on refresh
+      cursor.style.opacity = '0';
+
       // Move cursor with mouse
       document.addEventListener('mousemove', (e) => {
         requestAnimationFrame(() => {
+          if (cursor.style.opacity === '0') cursor.style.opacity = '1';
           cursor.style.left = e.clientX + 'px';
           cursor.style.top = e.clientY + 'px';
         });
@@ -2544,12 +2548,12 @@
 
       // Hide when mouse leaves browser window
       document.addEventListener('mouseleave', () => {
-        cursor.style.display = 'none';
+        cursor.style.opacity = '0';
       });
 
       // Show when mouse re-enters browser window
       document.addEventListener('mouseenter', () => {
-        cursor.style.display = 'block';
+        cursor.style.opacity = '1';
       });
 
       // Grow/glow on hover over interactive elements
