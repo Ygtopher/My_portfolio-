@@ -1365,8 +1365,8 @@
         pointer-events: none;
         z-index: 10010;
         opacity: 0;
-        /* Using Ink + difference ensures perfect high-contrast inversion in both Light and Dark mode */
-        background: var(--ink);
+        /* Always use pure white (#fff) with difference mode to perfectly invert both light and dark backgrounds */
+        background: #fff;
         box-shadow: 0 0 12px var(--accent-glow);
         transform-origin: center;
         /* No transform transition! JS physics handles it */
