@@ -3131,6 +3131,9 @@
         const burstRadius = 180 + holdPower * 220;  // 180–400px range
 
         // Fire shockwave
+        const style = getComputedStyle(document.body);
+        const inkHex = style.getPropertyValue('--ink').trim() || '#111827';
+        
         shockwaves.push({
           x: e.clientX,
           y: e.clientY,
@@ -3138,7 +3141,7 @@
           alpha: 1.0,
           speed: 10 + holdPower * 8,
           isBurst: true,
-          color: isRepelling ? '#EF4444' : '#FFD166' // Red if repel, Gold if normal
+          color: isRepelling ? inkHex : '#FFD166' // Theme ink if repel, Gold if normal
         });
 
         // Fling particles
@@ -3396,12 +3399,26 @@
         }
       }
 
+      function hexToRgb(hex) {
+        hex = hex.replace('#', '');
+        if (hex.length === 3) hex = hex.split('').map(x => x + x).join('');
+        const r = parseInt(hex.substring(0, 2), 16);
+        const g = parseInt(hex.substring(2, 4), 16);
+        const b = parseInt(hex.substring(4, 6), 16);
+        return `${r}, ${g}, ${b}`;
+      }
+
       function drawBlackHoleVisual() {
         if (!isHolding || mouse.x == null) return;
         
         const rings = 3;
         const baseRadius = 14 + holdPower * 22;
         const t = performance.now();
+        
+        // Dynamically get the theme's ink color (Black in light mode, White in dark mode)
+        const style = getComputedStyle(document.body);
+        const inkRGB = hexToRgb(style.getPropertyValue('--ink').trim() || '#111827');
+        const dimRGB = hexToRgb(style.getPropertyValue('--ink-dim').trim() || '#6B7280');
 
         for (let r = 0; r < rings; r++) {
           let ringR = baseRadius * (1 + r * 0.75);
@@ -3412,8 +3429,8 @@
           ctx.arc(mouse.x, mouse.y, ringR, 0, Math.PI * 2);
           if (isRepelling) {
             ctx.strokeStyle = r === 0 
-              ? `rgba(239, 68, 68, ${ringOpacity})` // Red
-              : `rgba(249, 115, 22, ${ringOpacity * 0.8})`; // Orange
+              ? `rgba(${inkRGB}, ${ringOpacity})` // Theme text color
+              : `rgba(${dimRGB}, ${ringOpacity * 0.8})`; // Theme dim color
           } else {
             ctx.strokeStyle = r === 0 
               ? `rgba(255, 209, 102, ${ringOpacity})` 
@@ -3427,9 +3444,9 @@
         let glowR = baseRadius * 3.5;
         let grad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, glowR);
         if (isRepelling) {
-          grad.addColorStop(0, `rgba(239, 68, 68, ${holdPower * 0.5})`);
-          grad.addColorStop(0.3, `rgba(249, 115, 22, ${holdPower * 0.25})`);
-          grad.addColorStop(1, 'rgba(249, 115, 22, 0)');
+          grad.addColorStop(0, `rgba(${inkRGB}, ${holdPower * 0.5})`);
+          grad.addColorStop(0.3, `rgba(${dimRGB}, ${holdPower * 0.25})`);
+          grad.addColorStop(1, `rgba(${dimRGB}, 0)`);
         } else {
           grad.addColorStop(0, `rgba(255, 209, 102, ${holdPower * 0.5})`);
           grad.addColorStop(0.3, `rgba(91, 192, 190, ${holdPower * 0.25})`);
@@ -3522,8 +3539,12 @@
               // Mouse lines are slightly brighter
               let opacity = (1 - distance / 150) * 0.4;
               ctx.globalAlpha = opacity * particles[a].alpha;
-              // Use Accent color for the mouse constellation lines!
-              ctx.strokeStyle = isRepelling ? '#EF4444' : (getComputedStyle(document.body).getPropertyValue('--accent').trim() || '#FFD166');
+              // Use Accent color for normal hover, or Ink color for Repulsor!
+              let lineColor = isRepelling 
+                ? (getComputedStyle(document.body).getPropertyValue('--ink').trim() || '#111827')
+                : (getComputedStyle(document.body).getPropertyValue('--accent').trim() || '#FFD166');
+              
+              ctx.strokeStyle = lineColor;
               ctx.lineWidth = 1.5;
               ctx.beginPath();
               ctx.moveTo(mouse.x, mouse.y);
