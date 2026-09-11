@@ -3061,6 +3061,12 @@
       let holdPower = 0; // 0–1, ramps up over 2s while holding
 
       window.addEventListener('mousemove', (e) => {
+        // If text is selected, disable particle interaction with mouse
+        if (window.getSelection().toString().trim().length > 0) {
+          mouse.x = null;
+          mouse.y = null;
+          return;
+        }
         mouse.x = e.clientX;
         mouse.y = e.clientY;
       });
@@ -3072,12 +3078,21 @@
 
       // ── Black Hole: hold to charge, release to explode ──
       window.addEventListener('mousedown', (e) => {
+        // Don't trigger black hole if clicking directly on text or UI elements
+        const textTags = ['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'SPAN', 'STRONG', 'EM', 'LI', 'A', 'BUTTON', 'INPUT', 'TEXTAREA'];
+        if (textTags.includes(e.target.tagName)) return;
+
         isHolding = true;
         holdStartTime = performance.now();
         holdPower = 0;
+        
+        // Prevent accidental text selection while charging black hole
+        document.body.style.userSelect = 'none';
       });
 
       window.addEventListener('mouseup', (e) => {
+        document.body.style.userSelect = ''; // Restore text selection
+        
         if (!isHolding) return;
         isHolding = false;
 
@@ -3126,6 +3141,7 @@
 
       // ── Safety resets (prevents getting stuck if dragging text) ──
       function cancelHold() {
+        document.body.style.userSelect = '';
         if (isHolding) {
           isHolding = false;
           holdPower = 0;
