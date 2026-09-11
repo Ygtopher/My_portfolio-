@@ -3267,6 +3267,14 @@
             this.history.shift();
           }
 
+          // ── ALWAYS APPLY ORGANIC DRIFT ──
+          this.vx *= 0.98;
+          this.vy *= 0.98;
+          let t = performance.now() * 0.0002; // Slower time evolution
+          // Use their position to create a fluid, winding field
+          this.vx += Math.sin(t + this.y * 0.01) * 0.006; // Much slower drift
+          this.vy += Math.cos(t + this.x * 0.01) * 0.006;
+
           if (mouse.x != null && mouse.y != null) {
             let dx = mouse.x - this.x;
             let dy = mouse.y - this.y;
@@ -3326,37 +3334,26 @@
                     this.alpha -= 0.06;
                   }
                 }
-              } else {
-                this.vx *= 0.98;
-                this.vy *= 0.98;
               }
               // ── NORMAL MODE: gentle orbital swirl ──
             } else if (!isHolding && distance < mouse.radius) {
               let force = (mouse.radius - distance) / mouse.radius;
-              let strength = force * this.density * 0.04;
+              let strength = force * this.density * 0.02; // Halved strength
 
               let tangentX = -dy / distance;
               let tangentY = dx / distance;
-              let radialX = (dx / distance) * strength * 0.5;
-              let radialY = (dy / distance) * strength * 0.5;
+              let radialX = (dx / distance) * strength * 0.4;
+              let radialY = (dy / distance) * strength * 0.4;
 
-              this.vx += tangentX * strength * 0.8 + radialX;
-              this.vy += tangentY * strength * 0.8 + radialY;
+              this.vx += tangentX * strength * 0.6 + radialX;
+              this.vy += tangentY * strength * 0.6 + radialY;
 
               let speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
-              if (speed > 4) {
-                this.vx = (this.vx / speed) * 4;
-                this.vy = (this.vy / speed) * 4;
+              if (speed > 2.0) { // Halved max speed
+                this.vx = (this.vx / speed) * 2.0;
+                this.vy = (this.vy / speed) * 2.0;
               }
-            } else {
-              this.vx *= 0.98;
-              this.vy *= 0.98;
             }
-          } else {
-            this.vx *= 0.99;
-            this.vy *= 0.99;
-            if (Math.abs(this.vx) < 0.1) this.vx += (Math.random() - 0.5) * 0.1;
-            if (Math.abs(this.vy) < 0.1) this.vy += (Math.random() - 0.5) * 0.1;
           }
 
           // Shockwave push
