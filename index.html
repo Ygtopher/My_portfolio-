@@ -2295,20 +2295,20 @@
 
     .track-1 {
       height: 40px;
-      opacity: 0.15;
-      animation: wave-flow 10s linear infinite;
+      opacity: 0.2;
+      animation: wave-flow 30s linear infinite;
     }
 
     .track-2 {
       height: 50px;
-      opacity: 0.10;
-      animation: wave-flow 14s linear infinite;
+      opacity: 0.15;
+      animation: wave-flow 45s linear infinite;
     }
 
     .track-3 {
       height: 60px;
-      opacity: 0.05;
-      animation: wave-flow 20s linear infinite reverse;
+      opacity: 0.1;
+      animation: wave-flow 60s linear infinite reverse;
     }
 
     .wave-divider svg {
@@ -2317,8 +2317,15 @@
       display: block;
     }
 
-    .wave-divider .shape-fill {
+    /* Multi-color wave overlap */
+    .track-1 .shape-fill {
       fill: var(--accent);
+    }
+    .track-2 .shape-fill {
+      fill: var(--accent-2);
+    }
+    .track-3 .shape-fill {
+      fill: var(--ink-dim);
     }
 
     @keyframes wave-flow {
