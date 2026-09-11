@@ -3080,11 +3080,27 @@
         mouse.y = null;
       });
 
+      // ── Double Right-Click to Unselect ──
+      let lastRightClickTime = 0;
+      window.addEventListener('contextmenu', (e) => {
+        const now = performance.now();
+        if (now - lastRightClickTime < 400) {
+          e.preventDefault(); // Stop the second menu from popping up
+          window.getSelection().removeAllRanges(); // Unselect text
+          lastRightClickTime = 0;
+        } else {
+          lastRightClickTime = now;
+        }
+      });
+
       // ── Black Hole: hold to charge, release to explode ──
       window.addEventListener('mousedown', (e) => {
         // Only trigger on left click (button 0), and skip if it's a double-click (detail >= 2)
         // This allows double-click-and-drag to select text natively!
         if (e.button !== 0 || e.detail >= 2) return;
+
+        // Clear any existing text selection on single left click
+        window.getSelection().removeAllRanges();
 
         isHolding = true;
         holdStartTime = performance.now();
