@@ -1357,26 +1357,25 @@
 
       .custom-cursor {
         position: fixed;
-        top: 0;
-        left: 0;
+        top: -12px;
+        left: -12px;
         width: 24px;
         height: 24px;
         border-radius: 50%;
         pointer-events: none;
         z-index: 10010;
         opacity: 0;
-        background: var(--accent);
+        /* Using Ink + difference ensures perfect high-contrast inversion in both Light and Dark mode */
+        background: var(--ink);
         box-shadow: 0 0 12px var(--accent-glow);
         transform-origin: center;
         /* No transform transition! JS physics handles it */
-        transition: opacity 0.3s ease, width 0.2s, height 0.2s, background 0.2s;
-        mix-blend-mode: exclusion;
+        transition: opacity 0.3s ease, background 0.2s, border 0.2s, box-shadow 0.2s;
+        mix-blend-mode: difference;
       }
 
       /* When hovering over interactive elements */
       .custom-cursor.hovering {
-        width: 64px;
-        height: 64px;
         background: transparent;
         border: 2px solid var(--accent);
         box-shadow: 0 0 16px var(--accent-glow), inset 0 0 16px var(--accent-glow);
@@ -2567,6 +2566,8 @@
         }
       });
 
+      let currentScale = 1;
+
       // Physics loop for fluid stretching blob
       function renderBlobCursor() {
         if (isVisible) {
@@ -2581,12 +2582,20 @@
           let speed = Math.sqrt(dx * dx + dy * dy);
           let angle = Math.atan2(dy, dx) * (180 / Math.PI);
           
+          // Smoothly scale up when hovering over buttons
+          let isHovering = cursor.classList.contains('hovering');
+          let targetScale = isHovering ? 2.6 : 1.0;
+          currentScale += (targetScale - currentScale) * 0.2;
+
           // Stretch and squish based on speed
-          let scaleX = Math.min(1 + speed * 0.015, 2.5);
-          let scaleY = Math.max(1 - speed * 0.005, 0.4);
+          let stretchX = Math.min(1 + speed * 0.015, 2.5);
+          let squishY = Math.max(1 - speed * 0.005, 0.4);
           
-          // Apply transform (subtract 12 to center the 24x24 blob)
-          cursor.style.transform = `translate(${cursorX - 12}px, ${cursorY - 12}px) rotate(${angle}deg) scale(${scaleX}, ${scaleY})`;
+          let finalScaleX = currentScale * stretchX;
+          let finalScaleY = currentScale * squishY;
+          
+          // Apply transform (top/left are already -12px in CSS, so translate directly to cursorX/Y)
+          cursor.style.transform = `translate(${cursorX}px, ${cursorY}px) rotate(${angle}deg) scale(${finalScaleX}, ${finalScaleY})`;
         }
         requestAnimationFrame(renderBlobCursor);
       }
