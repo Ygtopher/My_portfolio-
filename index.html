@@ -3311,33 +3311,33 @@
         const baseRadius = 14 + holdPower * 22;
         const t = performance.now();
 
+        // Glowing Energy Rings
         for (let r = 0; r < rings; r++) {
           let ringR = baseRadius * (1 + r * 0.75);
           let pulse = Math.sin(t * 0.004 * (r + 1)) * 0.4 + 0.6;
 
-          // Very dim, background-blending colors: near-black with slight tint
-          // Ring 0: barely-visible warm grey, Ring 1 & 2: cool dark grey
-          let ringOpacity = holdPower * pulse * (0.25 - r * 0.06);
+          let ringOpacity = holdPower * pulse * (0.6 - r * 0.15);
           ctx.beginPath();
           ctx.arc(mouse.x, mouse.y, ringR, 0, Math.PI * 2);
           ctx.strokeStyle = r === 0
-            ? `rgba(255, 209, 102, ${ringOpacity})`   // faint warm
-            : `rgba(91, 192, 190, ${ringOpacity * 0.7})`;  // faint cool
-          ctx.lineWidth = r === 0 ? 1 : 0.6;
+            ? `rgba(255, 209, 102, ${ringOpacity})`   // Gold inner ring
+            : `rgba(91, 192, 190, ${ringOpacity * 0.8})`;  // Teal outer rings
+          ctx.lineWidth = r === 0 ? 2 : 1;
           ctx.globalAlpha = 1.0;
           ctx.stroke();
         }
 
-        // Subtle dark vignette that deepens with hold power — blends into bg
-        let vigR = baseRadius * 2.5;
-        let grad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, vigR);
-        grad.addColorStop(0,   `rgba(3,7,18,${holdPower * 0.75})`);
-        grad.addColorStop(0.4, `rgba(3,7,18,${holdPower * 0.35})`);
-        grad.addColorStop(1,   'rgba(3,7,18,0)');
+        // Glowing Energy Core (instead of black vignette)
+        let glowR = baseRadius * 3.5;
+        let grad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, glowR);
+        grad.addColorStop(0,   `rgba(255, 209, 102, ${holdPower * 0.5})`); // Bright Gold center
+        grad.addColorStop(0.3, `rgba(91, 192, 190, ${holdPower * 0.25})`); // Teal mid-glow
+        grad.addColorStop(1,   'rgba(91, 192, 190, 0)');                   // Fade out completely
+        
         ctx.fillStyle = grad;
         ctx.globalAlpha = 1.0;
         ctx.beginPath();
-        ctx.arc(mouse.x, mouse.y, vigR, 0, Math.PI * 2);
+        ctx.arc(mouse.x, mouse.y, glowR, 0, Math.PI * 2);
         ctx.fill();
 
         ctx.globalAlpha = 1.0;
