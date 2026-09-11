@@ -1359,32 +1359,28 @@
         position: fixed;
         top: 0;
         left: 0;
-        width: 28px;
-        height: 28px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
         pointer-events: none;
-        transform: translate(0, 0);
         z-index: 10010;
-        transition: transform 0.15s ease, filter 0.2s ease, opacity 0.2s;
-        filter: drop-shadow(0 0 4px var(--accent));
-        opacity: 1;
+        opacity: 0;
+        background: var(--accent);
+        box-shadow: 0 0 12px var(--accent-glow);
+        transform-origin: center;
+        /* No transform transition! JS physics handles it */
+        transition: opacity 0.3s ease, width 0.2s, height 0.2s, background 0.2s;
+        mix-blend-mode: exclusion;
       }
 
-      .custom-cursor svg path,
-      .custom-cursor svg rect {
-        stroke: var(--accent);
-        fill: var(--bg);
-        transition: fill 0.2s, stroke 0.2s;
-      }
-
+      /* When hovering over interactive elements */
       .custom-cursor.hovering {
-        filter: drop-shadow(0 0 8px var(--accent)) drop-shadow(0 0 16px var(--accent-glow));
-        opacity: 1;
-      }
-
-      .custom-cursor.hovering svg path,
-      .custom-cursor.hovering svg rect {
-        fill: var(--bg);
-        stroke: var(--ink);
+        width: 64px;
+        height: 64px;
+        background: transparent;
+        border: 2px solid var(--accent);
+        box-shadow: 0 0 16px var(--accent-glow), inset 0 0 16px var(--accent-glow);
+        mix-blend-mode: normal;
       }
     }
 
@@ -1564,14 +1560,7 @@
   <div id="glitch-overlay"></div>
 
   <div id="scroll-progress"></div>
-  <div id="custom-cursor" class="custom-cursor">
-    <!-- Mouse device SVG icon -->
-    <svg viewBox="0 0 24 38" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
-      <rect x="1" y="1" width="22" height="32" rx="11" stroke-width="1.5" />
-      <line x1="12" y1="1" x2="12" y2="14" stroke-width="1.5" stroke="var(--accent)" />
-      <rect x="9" y="6" width="6" height="8" rx="3" fill="var(--accent)" stroke="none" />
-    </svg>
-  </div>
+  <div id="custom-cursor" class="custom-cursor"></div>
 
   <div class="grid-bg" aria-hidden="true"></div>
   <canvas id="particle-canvas" aria-hidden="true"></canvas>
@@ -2545,27 +2534,63 @@
     // ── Custom Cursor Logic ──────────────────────────────────────────────
     const cursor = document.getElementById('custom-cursor');
     if (cursor && !window.matchMedia('(max-width: 860px)').matches) {
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 2;
+      let cursorX = mouseX;
+      let cursorY = mouseY;
+      let isVisible = false;
+
       // Start hidden so it doesn't get stuck at top-left on refresh
       cursor.style.opacity = '0';
 
-      // Move cursor with mouse
       document.addEventListener('mousemove', (e) => {
-        requestAnimationFrame(() => {
-          if (cursor.style.opacity === '0') cursor.style.opacity = '1';
-          cursor.style.left = e.clientX + 'px';
-          cursor.style.top = e.clientY + 'px';
-        });
+        if (!isVisible) {
+          cursor.style.opacity = '1';
+          isVisible = true;
+          // Snap instantly on first move
+          cursorX = e.clientX;
+          cursorY = e.clientY;
+        }
+        mouseX = e.clientX;
+        mouseY = e.clientY;
       });
 
-      // Hide when mouse leaves browser window
       document.addEventListener('mouseleave', () => {
         cursor.style.opacity = '0';
+        isVisible = false;
       });
 
-      // Show when mouse re-enters browser window
       document.addEventListener('mouseenter', () => {
-        cursor.style.opacity = '1';
+        if (mouseX !== window.innerWidth / 2) {
+          cursor.style.opacity = '1';
+          isVisible = true;
+        }
       });
+
+      // Physics loop for fluid stretching blob
+      function renderBlobCursor() {
+        if (isVisible) {
+          // Smooth spring interpolation
+          let dx = mouseX - cursorX;
+          let dy = mouseY - cursorY;
+          
+          cursorX += dx * 0.25;
+          cursorY += dy * 0.25;
+          
+          // Calculate velocity and angle
+          let speed = Math.sqrt(dx * dx + dy * dy);
+          let angle = Math.atan2(dy, dx) * (180 / Math.PI);
+          
+          // Stretch and squish based on speed
+          let scaleX = Math.min(1 + speed * 0.015, 2.5);
+          let scaleY = Math.max(1 - speed * 0.005, 0.4);
+          
+          // Apply transform (subtract 12 to center the 24x24 blob)
+          cursor.style.transform = `translate(${cursorX - 12}px, ${cursorY - 12}px) rotate(${angle}deg) scale(${scaleX}, ${scaleY})`;
+        }
+        requestAnimationFrame(renderBlobCursor);
+      }
+      requestAnimationFrame(renderBlobCursor);
 
       // Grow/glow on hover over interactive elements
       const interactables = document.querySelectorAll('a, button, input, textarea, .tech-card');
