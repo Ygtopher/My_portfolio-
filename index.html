@@ -1486,6 +1486,54 @@
       outline: 2px solid var(--accent);
       outline-offset: 3px;
     }
+    /* ============================================================
+       TELEPORT GLITCH OVERLAY
+       ============================================================ */
+    #glitch-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 999999;
+      pointer-events: none;
+      opacity: 0;
+      /* Subtle digital scanlines */
+      background-image: repeating-linear-gradient(
+        transparent 0,
+        transparent 2px,
+        rgba(0, 0, 0, 0.1) 2px,
+        rgba(0, 0, 0, 0.1) 4px
+      );
+    }
+
+    html.teleporting {
+      scroll-behavior: auto !important;
+    }
+
+    html.teleporting #glitch-overlay {
+      animation: warp-teleport 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+    }
+
+    @keyframes warp-teleport {
+      0% { 
+        opacity: 0; 
+        backdrop-filter: blur(0px) grayscale(0); 
+        background-color: transparent;
+      }
+      40% { 
+        opacity: 1; 
+        backdrop-filter: blur(12px) grayscale(0.8); 
+        background-color: rgba(15, 23, 42, 0.8); /* Deep dark blue */
+      }
+      60% { 
+        opacity: 1; 
+        backdrop-filter: blur(12px) grayscale(0.8); 
+        background-color: rgba(15, 23, 42, 0.8);
+      }
+      100% { 
+        opacity: 0; 
+        backdrop-filter: blur(0px) grayscale(0); 
+        background-color: transparent;
+      }
+    }
   </style>
 
   <!-- Vercel Web Analytics -->
@@ -1508,6 +1556,9 @@
       <div class="cin-line"></div>
     </div>
   </div>
+
+  <!-- Teleport Glitch Overlay -->
+  <div id="glitch-overlay"></div>
 
   <div id="scroll-progress"></div>
   <div id="custom-cursor" class="custom-cursor">
@@ -2792,6 +2843,41 @@
       document.getElementById('navtoggle').classList.remove('open');
       document.body.style.overflow = '';
     }
+
+    // ── Teleport Glitch Navigation ─────────────────────────────────────────
+    document.querySelectorAll('.navlinks a, .logo').forEach(link => {
+      link.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        
+        if (targetId && targetId.startsWith('#')) {
+          e.preventDefault(); // Stop native smooth scroll
+          
+          let targetEl = targetId !== '#' ? document.querySelector(targetId) : null;
+          let isTop = targetId === '#';
+          
+          if (targetEl || isTop) {
+            // 1. Trigger the glitch overlay and disable smooth scrolling
+            document.documentElement.classList.add('teleporting');
+            
+            // 2. Wait 150ms (mid-glitch) to jump to the new section instantly
+            setTimeout(() => {
+              if (isTop) {
+                window.scrollTo({ top: 0, behavior: 'auto' });
+              } else {
+                targetEl.scrollIntoView({ behavior: 'auto' });
+              }
+            }, 150);
+
+            // 3. Clear the glitch effect after 450ms (when animation is over)
+            setTimeout(() => {
+              document.documentElement.classList.remove('teleporting');
+            }, 450);
+
+            closeNav(); // Close mobile menu if open
+          }
+        }
+      });
+    });
 
     // ── Theme Toggle Logic ───────────────────────────────────────────────
     const themeToggleBtn = document.getElementById('theme-toggle');
