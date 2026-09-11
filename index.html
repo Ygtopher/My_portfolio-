@@ -3174,37 +3174,45 @@
             let dy = mouse.y - this.y;
             let distance = Math.sqrt(dx * dx + dy * dy);
 
-            if (isHolding && distance < mouse.radius + holdPower * 240) {
-              // ── BLACK HOLE MODE: strong inward spiral ──
-              let force = (1 - distance / (mouse.radius + holdPower * 240));
-              let strength = force * this.density * (0.06 + holdPower * 0.22);
+            if (isHolding && distance > 1) {
+              // Attraction radius grows from 160px → full screen diagonal over 2s
+              const screenDiag = Math.sqrt(width * width + height * height);
+              const attractRadius = 160 + holdPower * screenDiag;
 
-              // Strong radial pull
-              let radialX = (dx / distance) * strength * 1.2;
-              let radialY = (dy / distance) * strength * 1.2;
+              if (distance < attractRadius) {
+                // ── BLACK HOLE MODE: strong inward spiral ──
+                let force = (1 - distance / attractRadius);
+                let strength = force * this.density * (0.06 + holdPower * 0.22);
 
-              // Tighter spiral (more tangential at high power)
-              let tangentX = (-dy / distance) * strength * (0.4 + holdPower * 0.6);
-              let tangentY = (dx / distance) * strength * (0.4 + holdPower * 0.6);
+                // Strong radial pull
+                let radialX = (dx / distance) * strength * 1.2;
+                let radialY = (dy / distance) * strength * 1.2;
 
-              this.vx += radialX + tangentX;
-              this.vy += radialY + tangentY;
+                // Tighter spiral (more tangential at high power)
+                let tangentX = (-dy / distance) * strength * (0.4 + holdPower * 0.6);
+                let tangentY = (dx / distance) * strength * (0.4 + holdPower * 0.6);
 
-              // Speed cap scales with hold power
-              let maxSpeed = 5 + holdPower * 10;
-              let speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
-              if (speed > maxSpeed) {
-                this.vx = (this.vx / speed) * maxSpeed;
-                this.vy = (this.vy / speed) * maxSpeed;
+                this.vx += radialX + tangentX;
+                this.vy += radialY + tangentY;
+
+                // Speed cap scales with hold power
+                let maxSpeed = 5 + holdPower * 10;
+                let speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+                if (speed > maxSpeed) {
+                  this.vx = (this.vx / speed) * maxSpeed;
+                  this.vy = (this.vy / speed) * maxSpeed;
+                }
+
+                // Consume: if particle gets within event horizon, fade it out
+                if (distance < 18 + holdPower * 20) {
+                  this.alpha -= 0.06;
+                }
+              } else {
+                this.vx *= 0.98;
+                this.vy *= 0.98;
               }
-
-              // Consume: if particle gets within event horizon, fade it out
-              if (distance < 18 + holdPower * 20) {
-                this.alpha -= 0.06;
-              }
-
-            } else if (!isHolding && distance < mouse.radius) {
               // ── NORMAL MODE: gentle orbital swirl ──
+            } else if (!isHolding && distance < mouse.radius) {
               let force = (mouse.radius - distance) / mouse.radius;
               let strength = force * this.density * 0.04;
 
@@ -3274,26 +3282,35 @@
 
         const rings = 3;
         const baseRadius = 14 + holdPower * 22;
+        const t = performance.now();
 
         for (let r = 0; r < rings; r++) {
-          let ringR = baseRadius * (1 + r * 0.7);
-          let pulse = Math.sin(performance.now() * 0.005 * (r + 1)) * 0.3 + 0.7;
+          let ringR = baseRadius * (1 + r * 0.75);
+          let pulse = Math.sin(t * 0.004 * (r + 1)) * 0.4 + 0.6;
+
+          // Very dim, background-blending colors: near-black with slight tint
+          // Ring 0: barely-visible warm grey, Ring 1 & 2: cool dark grey
+          let ringOpacity = holdPower * pulse * (0.25 - r * 0.06);
           ctx.beginPath();
           ctx.arc(mouse.x, mouse.y, ringR, 0, Math.PI * 2);
-          ctx.strokeStyle = r === 0 ? '#FFD166' : '#5BC0BE';
-          ctx.lineWidth = r === 0 ? 1.5 : 0.8;
-          ctx.globalAlpha = holdPower * pulse * (0.9 - r * 0.25);
+          ctx.strokeStyle = r === 0
+            ? `rgba(255, 209, 102, ${ringOpacity})`   // faint warm
+            : `rgba(91, 192, 190, ${ringOpacity * 0.7})`;  // faint cool
+          ctx.lineWidth = r === 0 ? 1 : 0.6;
+          ctx.globalAlpha = 1.0;
           ctx.stroke();
         }
 
-        // Dark core
-        let grad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, baseRadius);
-        grad.addColorStop(0, `rgba(3,7,18,${holdPower * 0.95})`);
-        grad.addColorStop(1, 'rgba(3,7,18,0)');
+        // Subtle dark vignette that deepens with hold power — blends into bg
+        let vigR = baseRadius * 2.5;
+        let grad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, vigR);
+        grad.addColorStop(0,   `rgba(3,7,18,${holdPower * 0.75})`);
+        grad.addColorStop(0.4, `rgba(3,7,18,${holdPower * 0.35})`);
+        grad.addColorStop(1,   'rgba(3,7,18,0)');
         ctx.fillStyle = grad;
         ctx.globalAlpha = 1.0;
         ctx.beginPath();
-        ctx.arc(mouse.x, mouse.y, baseRadius, 0, Math.PI * 2);
+        ctx.arc(mouse.x, mouse.y, vigR, 0, Math.PI * 2);
         ctx.fill();
 
         ctx.globalAlpha = 1.0;
