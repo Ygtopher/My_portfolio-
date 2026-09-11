@@ -3124,6 +3124,17 @@
         }
       });
 
+      // ── Safety resets (prevents getting stuck if dragging text) ──
+      function cancelHold() {
+        if (isHolding) {
+          isHolding = false;
+          holdPower = 0;
+        }
+      }
+      window.addEventListener('dragstart', cancelHold);
+      window.addEventListener('blur', cancelHold);
+      document.addEventListener('mouseleave', cancelHold);
+
       function resizeCanvas() {
         width = window.innerWidth;
         height = window.innerHeight;
