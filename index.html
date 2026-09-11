@@ -3156,9 +3156,27 @@
           this.size = size;
           this.density = (Math.random() * 20) + 5;
           this.alpha = 1.0; // for consumption fade
+          this.history = []; // track past positions for comet tail
         }
 
         draw(dotColor) {
+          // Draw comet tail
+          if (this.history.length > 1) {
+            ctx.beginPath();
+            ctx.moveTo(this.history[0].x, this.history[0].y);
+            for (let i = 1; i < this.history.length; i++) {
+              ctx.lineTo(this.history[i].x, this.history[i].y);
+            }
+            ctx.strokeStyle = dotColor;
+            ctx.lineWidth = this.size;
+            // Tail opacity scales with speed (distance traveled over history) and particle alpha
+            let speed = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+            let tailAlpha = Math.min(speed / 15, 0.4) * this.alpha;
+            ctx.globalAlpha = tailAlpha;
+            ctx.stroke();
+          }
+
+          // Draw head
           ctx.globalAlpha = this.alpha * 0.65;
           ctx.fillStyle = dotColor;
           ctx.beginPath();
@@ -3169,6 +3187,12 @@
         }
 
         update() {
+          // Record history for tail
+          this.history.push({ x: this.x, y: this.y });
+          if (this.history.length > 8) {
+            this.history.shift();
+          }
+
           if (mouse.x != null && mouse.y != null) {
             let dx = mouse.x - this.x;
             let dy = mouse.y - this.y;
@@ -3256,11 +3280,14 @@
           this.x += this.vx;
           this.y += this.vy;
 
+          let wrapped = false;
           // Wrap at edges
-          if (this.x < -10) this.x = width + 10;
-          if (this.x > width + 10) this.x = -10;
-          if (this.y < -10) this.y = height + 10;
-          if (this.y > height + 10) this.y = -10;
+          if (this.x < -10) { this.x = width + 10; wrapped = true; }
+          if (this.x > width + 10) { this.x = -10; wrapped = true; }
+          if (this.y < -10) { this.y = height + 10; wrapped = true; }
+          if (this.y > height + 10) { this.y = -10; wrapped = true; }
+
+          if (wrapped) this.history = []; // Clear tail to prevent drawing a line across the whole screen
         }
       }
 
